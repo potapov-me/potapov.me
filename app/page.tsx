@@ -7,7 +7,7 @@ export default function Home() {
                 <div className="bg-white rounded-2xl shadow-lg p-8">
                     <div className="space-y-6">
                         <p className="text-lg leading-relaxed">
-                            <span className="font-bold">37 лет</span>, из которых более 20 посвящено программированию.
+                            <span className="font-bold">{new Date().getFullYear() - 1988} лет</span>, из которых более 20 посвящено программированию.
                             Моя профессиональная история — это постоянный поиск баланса между техническим мастерством
                             и предпринимательским видением.
                         </p>
