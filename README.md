@@ -1,3 +1,6 @@
+[![Docker Pulls](https://img.shields.io/docker/pulls/potapovme/potapov.me.svg)](https://hub.docker.com/r/potapovme/potapov.me)
+[![Docker Image Size](https://img.shields.io/docker/image-size/potapovme/potapov.me.svg)](https://hub.docker.com/r/potapovme/potapov.me)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
