@@ -42,11 +42,11 @@ export default function RootLayout({
                             <p>Инженерный подход к проектам</p>
                         </div>
                         <div className="flex space-x-4">
-                            <a href="https://t.me/potapov_me" target="_blank"
+                            <a href="https://t.me/potapov_me" target="_blank" rel="noopener"
                                className="hover:font-black transition-colors">Telegram</a>
-                            <a href="https://github.com/potapov-me" target="_blank"
+                            <a href="https://github.com/potapov-me" target="_blank" rel="noopener"
                                className="hover:font-black transition-colors">GitHub</a>
-                            <a href="mailto:constantin@potapov.me" target="_blank"
+                            <a href="mailto:constantin@potapov.me" target="_blank" rel="noopener"
                                className="hover:font-black transition-colors">Email</a>
                         </div>
                     </div>
