@@ -2,7 +2,7 @@
 
 /*noinspection CssInvalidAtRule*/
 @theme {
-  /*--color-*: initial;*/
+  --color-*: initial;
   --color-primary: #680313;
   --color-secondary: #00536b;
   --color-black: #010101;

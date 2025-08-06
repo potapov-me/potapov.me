@@ -23,11 +23,11 @@ export default function RootLayout({
                         Константин Потапов
                     </h1>
                     <p className="text-xl text-secondary mb-6">
-                        Разработчик · Предприниматель · Ищущий&nbsp;изменения
+                        Разработчик · Предприниматель · ???
                     </p>
                     <div className="inline-flex items-center bg-secondary text-white rounded-full px-4 py-2 text-sm">
                         <span className="w-3 h-3 bg-white rounded-full mr-2 animate-pulse"></span>
-                        В процессе профессиональной трансформации
+                        красивый теглайн
                     </div>
                 </div>
             </header>

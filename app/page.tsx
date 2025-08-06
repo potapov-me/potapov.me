@@ -4,7 +4,7 @@ export default function Home() {
             {/* Блок "Обо мне" */}
             <section className="my-16">
                 <h2 className="text-3xl font-bold mb-6 text-center">Мой путь</h2>
-                <div className="bg-white rounded-2xl shadow-lg p-8">
+                <div className="bg-white shadow-lg p-8">
                     <div className="space-y-6">
                         <p className="text-lg leading-relaxed">
                             <span className="font-bold">{new Date().getFullYear() - 1988} лет</span>, из которых более 20 посвящено программированию.
@@ -13,7 +13,7 @@ export default function Home() {
                         </p>
 
                         <div className="flex items-start">
-                            <div className="bg-primary text-white rounded-lg p-4 flex-1">
+                            <div className="bg-primary bg-texture text-white rounded-lg p-4 flex-1">
                                 <h3 className="font-bold mb-2">Образование</h3>
                                 <p>Уральский государственный технический университет (УГТУ-УПИ)</p>
                                 <p className="text-sm text-white mt-1">Выпуск 2010 года, физико-технический
@@ -80,7 +80,7 @@ export default function Home() {
             </section>
 
             {/* Философия */}
-            <section className=" bg-secondary rounded-2xl p-8 text-white">
+            <section className=" bg-secondary p-8 text-white">
                 <h2 className="text-2xl font-bold mb-4">Моя философия развития</h2>
                 <p className="mb-3 text-indigo-100">
                     • Технологии — инструмент, а не цель<br/>
