@@ -1,4 +1,12 @@
 export default function Home() {
+    const philosophy = [
+        "аналитическое мышление", 
+        "надежность", 
+        "рациональность", 
+        "установка на рост", 
+        "ориентация на результат", 
+    ];
+
     return (
         <main className="max-w-5xl mx-auto px-6 pb-20">
             {/* Блок "Обо мне" */}
@@ -9,10 +17,9 @@ export default function Home() {
 
                 <div className="flex items-start">
                     <div className="bg-primary bg-texture text-white p-4 flex-1 rounded-lg shadow-md">
-                        <h3 className="font-bold mb-2">Образование</h3>
                         <p>Уральский государственный технический университет (УГТУ-УПИ)</p>
                         <p className="text-sm text-white mt-1">Выпуск 2010 года, физико-технический
-                            факультет</p>
+                            факультет, кафедра молекулярной физики</p>
                     </div>
                 </div>
             </section>
@@ -23,6 +30,32 @@ export default function Home() {
                 <div className="space-y-10">
                     <div className="relative pl-8 border-l-2 border-primary">
                         <div className="absolute -left-2 top-0 w-6 h-6 bg-primary rounded-full"></div>
+                        <h3 className="text-xl font-bold">ATCS (2005)</h3>
+                        <p className="mt-2">
+                            Система проверки задач для турниров по спортивному программированию. Первый опыт в разработке
+                            программного обеспечения. 
+                        </p>
+                    </div>
+                    <div className="relative pl-8 border-l-2 border-primary">
+                        <div className="absolute -left-2 top-0 w-6 h-6 bg-primary rounded-full"></div>
+                        <h3 className="text-xl font-bold">Psy-Sound (2006)</h3>
+                        <p className="mt-2">
+                            Попробовал себя в shareware разработке. Создал редактор бинауральной музыки для медитации и 
+                            внедрения собственных установок. 
+                        </p>
+                    </div>
+                    <div className="relative pl-8 border-l-2 border-primary">
+                        <div className="absolute -left-2 top-0 w-6 h-6 bg-primary rounded-full"></div>
+                        <h3 className="text-xl font-bold">U-Infinity (2007)</h3>
+                        <p className="mt-2">
+                            Мультиплатформенный P2P видеохостинг где пользователи могли обмениваться видеофайлами.
+                            Вдохновленный торрентом, но с возможностью смотреть видео в реальном времени.
+                            Проект был закрыт, но это был мой первый опыт
+                            в разработке сложного программного обеспечения.
+                        </p>
+                    </div>
+                    <div className="relative pl-8 border-l-2 border-primary">
+                        <div className="absolute -left-2 top-0 w-6 h-6 bg-primary rounded-full"></div>
                         <h3 className="text-xl font-bold">MultiGaminator (2008)</h3>
                         <p className="mt-2">
                             Как фрилансер разработал сначала сервер управления для казино и зала игровых автоматов, а затем
@@ -31,7 +64,15 @@ export default function Home() {
                             не считая доп модулей, но я как разработчик получил крохи.
                             Справедливости ради, для казино бизнеса нужен не только софт, но и связи в криминале. 
                             Это было очень вдохновляющее время, когда я впервые увидел, что могу создавать что-то
-                            действительно сложное и полезное.
+                            действительно работающее, что готовы покупать.
+                        </p>
+                    </div>
+                    <div className="relative pl-8 border-l-2 border-primary">
+                        <div className="absolute -left-2 top-0 w-6 h-6 bg-primary rounded-full"></div>
+                        <h3 className="text-xl font-bold">Социогенетика (2009)</h3>
+                        <p className="mt-2">
+                            Первый веб проект &quot;система которая делает сама себя по отзывам людей&quot;. 
+                            Было собрано очень теплое комьюнити из популярных в ту эпоху стартап тусовок.
                         </p>
                     </div>
 
@@ -57,12 +98,11 @@ export default function Home() {
             {/* Философия */}
             <section className=" bg-secondary p-8 text-white">
                 <h2 className="text-2xl font-bold mb-4">Моя философия развития</h2>
-                <p className="mb-3 text-indigo-100">
-                    • Технологии — инструмент, а не цель<br/>
-                    • Ошибки — обязательная часть роста<br/>
-                    • Устойчивость важнее скорости<br/>
-                    • Баланс между инновациями и практичностью<br/>
-                </p>
+                <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                    {philosophy.map((item, index) => (
+                        <li key={index} className="transition-colors hover:text-blue-600">{item}</li>
+                    ))}
+                </ul>
                 <p className="mt-4 font-light italic">
                     &quot;Прошел путь от чистого кода к пониманию: ценность создается на стыке технологий,
                     бизнес-модели и человеческих отношений&quot;
