@@ -1,4 +1,6 @@
-async function getProjects() {
+import {Project} from "@/app/types";
+
+async function getProjects(): Promise<Project[]> {
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/projects`, {cache: "no-store"});
     if (!res.ok) {
         throw new Error('Failed to fetch projects');
@@ -13,7 +15,7 @@ export default async function ProjectsPage() {
         <main className="max-w-5xl mx-auto px-6 pb-20">
             <h1 className="text-4xl md:text-5xl font-bold my-4 text-primary text-center">Проекты</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                {projects.map((project: any) => (
+                {projects.map((project) => (
                     <div key={project.id} className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
                         <div className="p-6">
                             <h2 className="text-2xl font-bold text-primary mb-2">{project.name}</h2>

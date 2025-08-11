@@ -6,6 +6,7 @@
   --color-primary: #680313;
   --color-primary-dark: #4a020d;
   --color-secondary: #00536b;
+  --color-error: #ef4444;
   --color-black: #010101;
   --color-white: #fefefe;
   --color-gray-50: #fafafa;
@@ -14,9 +15,6 @@
   --color-green-100: #c8e6c9;
   --color-green-400: #66bb6a;
   --color-green-700: #388e3c;
-  --color-red-500: #ef4444;
-  --color-red-600: #dc2626;
-  --color-blue-500: #3b82f6;
 }
 
 .bg-texture {

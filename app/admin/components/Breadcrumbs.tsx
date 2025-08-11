@@ -22,9 +22,14 @@ const Breadcrumbs = () => {
 
                     return (
                         <li key={href} className="flex items-center">
-                            <Link href={href} className={`${isLast ? "text-gray-800" : "hover:underline"}`}>
-                                {name}
-                            </Link>
+                            {!isLast ?
+                                <Link href={href} className="hover:underline">
+                                    {name}
+                                </Link>:
+                                <span className="text-gray-800">
+                                    {name}
+                                </span>
+                            }
                             {!isLast && <span className="mx-2">/</span>}
                         </li>
                     );

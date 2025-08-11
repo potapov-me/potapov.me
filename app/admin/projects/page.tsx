@@ -134,16 +134,14 @@ export default function ProjectsPage() {
                         <tbody>
                             {projects.map((project) => (
                                 <tr key={project.id}>
-                                    <td className="py-2 px-4 border-b">{project.name}</td>
-                                    <td className="py-2 px-4 border-b">{project.description}</td>
-                                    <td className="py-2 px-4 border-b">
-                                        <button onClick={() => { setEditingProject(project); setIsModalOpen(true); }} className="text-[var(--color-blue-500)] hover:underline mr-4 flex items-center">
+                                    <td className="py-2 px-4">{project.name}</td>
+                                    <td className="py-2 px-4">{project.description}</td>
+                                    <td className="py-2 px-4 flex">
+                                        <button onClick={() => { setEditingProject(project); setIsModalOpen(true); }} className="text-secondary hover:text-white hover:bg-secondary mr-4 p-4 flex items-center">
                                             <FiEdit className="mr-1"/>
-                                            Редактировать
                                         </button>
-                                        <button onClick={() => handleDelete(project.id)} className="text-[var(--color-red-500)] hover:underline flex items-center">
+                                        <button onClick={() => handleDelete(project.id)} className="text-primary hover:text-white hover:bg-primary p-4 flex items-center">
                                             <FiTrash2 className="mr-1"/>
-                                            Удалить
                                         </button>
                                     </td>
                                 </tr>

@@ -11,5 +11,14 @@
     ],
     "repo": "https://github.com/potapov-me/potapov.me",
     "url": "http://potapov.me"
+  },
+  {
+    "name": "тест",
+    "description": "тест",
+    "stack": [
+      "т33вв",
+      "ппр"
+    ],
+    "id": 2
   }
 ]
