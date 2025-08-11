@@ -21,6 +21,7 @@ import {
 } from "react-icons/si";
 import {SkillCategory, Skills} from "./components/Skills";
 
+
 export default function Home() {
     const philosophy = [
         "аналитическое мышление",
@@ -251,6 +252,5 @@ export default function Home() {
                 </section>
             </main>
         </>
-        
     );
 }
