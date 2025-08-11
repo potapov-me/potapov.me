@@ -24,6 +24,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     return NextResponse.json(projects[projectIndex]);
 }
 
+
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = await params;
     const id = parseInt(resolvedParams.id, 10);

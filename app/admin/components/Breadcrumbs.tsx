@@ -30,6 +30,7 @@ const Breadcrumbs = () => {
                                     {name}
                                 </span>
                             }
+
                             {!isLast && <span className="mx-2">/</span>}
                         </li>
                     );
