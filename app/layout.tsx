@@ -16,10 +16,10 @@ export default function RootLayout({
         <html lang="en">
         <body
             className={`antialiased`}>
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800">
+        <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800">
             <MainMenu />
 
-            {children}
+            <main className="flex-grow">{children}</main>
 
             <footer className="bg-texture bg-black text-white py-10 px-6">
                 <div className="max-w-5xl mx-auto">

@@ -1,14 +1,59 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/potapovme/potapov.me.svg)](https://hub.docker.com/r/potapovme/potapov.me)
-[![Docker Image Size](https://img.shields.io/docker/image-size/potapovme/potapov.me.svg)](https://hub.docker.com/r/potapovme/potapov.me)
+# potapov.me
 
-# Тестирую CI / CD
+Персональный сайт и портфолио Константина Потапова.
 
-Проект моего персонального сайта
+## Особенности
 
-## Установка хуков
+- Страница с информацией обо мне
+- Страница с проектами
+- Контактная информация
+- Адаптивный дизайн для мобильных устройств
+- Админ-панель для управления проектами
 
-Для установки git хуков выполните команду:
+## Технологии
 
-```bash
-./install-hooks.sh
-```
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+## Начало работы
+
+1.  **Клонируйте репозиторий:**
+
+    ```bash
+    git clone https://github.com/potapov-me/potapov.me.git
+    cd potapov.me
+    ```
+
+2.  **Установите зависимости:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Настройте переменные окружения:**
+
+    Создайте файл `.env.local` в корне проекта и добавьте следующие переменные:
+
+    ```
+    ADMIN_PASSWORD=ваш_секретный_пароль
+    NEXT_PUBLIC_URL=http://localhost:3000
+    ```
+
+4.  **Запустите сервер для разработки:**
+
+    ```bash
+    npm run dev
+    ```
+
+    Откройте [http://localhost:3000](http://localhost:3000) в вашем браузере.
+
+## Админ-панель
+
+Админ-панель доступна по адресу `/admin`.
+
+- **Вход:** `/admin/login`
+- **Пароль:** Используйте значение из переменной `ADMIN_PASSWORD`.
+
+В админ-панели вы можете управлять проектами (создавать, редактировать, удалять).

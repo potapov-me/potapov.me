@@ -12,6 +12,7 @@ const MainMenu = () => {
         {href: "/", label: "Обо мне"},
         {href: "/projects", label: "Проекты"},
         {href: "/contact", label: "Контакты"},
+        {href: "/admin", label: "Админка"},
     ];
 
     return (
