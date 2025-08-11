@@ -1,12 +1,12 @@
 import {IconType} from 'react-icons';
 
-interface Skill {
+export interface Skill {
     name: string;
-    hideName: boolean;
+    hideName?: boolean;
     icon?: IconType;
 }
 
-interface SkillCategory {
+export interface SkillCategory {
     category: string;
     items: Skill[];
 }

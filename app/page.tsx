@@ -14,13 +14,12 @@ import {
     SiGo,
     SiJavascript, SiMongodb,
     SiMysql,
-    SiNextdotjs,
-    SiPostgresql, SiRabbitmq,
+    SiNextdotjs, SiRabbitmq,
     SiTailwindcss,
     SiTypescript,
     SiWagtail
 } from "react-icons/si";
-import {Skills} from "./components/Skills";
+import {SkillCategory, Skills} from "./components/Skills";
 
 export default function Home() {
     const philosophy = [
@@ -31,7 +30,7 @@ export default function Home() {
         "ориентация на результат",
     ];
 
-    const skills = [
+    const skills: SkillCategory[] = [
         {
             category: "Backend",
             items: [
@@ -60,7 +59,7 @@ export default function Home() {
                 {name: "Linux", icon: FaLinux},
                 {name: "Git", icon: FaGitAlt},
                 {name: "MySQL", icon: SiMysql},
-                {name: "Postgres", icon: SiPostgresql},
+                // {name: "Postgres", icon: SiPostgresql},
                 {name: "MongoDb", icon: SiMongodb},
                 {name: "RabbitMQ", icon: SiRabbitmq},
             ]
@@ -72,6 +71,7 @@ export default function Home() {
                 {name: "Agile"},
                 {name: "Scrum"},
                 {name: "Kanban"},
+                {name: "Fiber"},
             ]
         }
     ];
@@ -191,8 +191,11 @@ export default function Home() {
                             <span className="font-bold">{new Date().getFullYear() - 1988} лет</span>, из которых более
                             20 посвящено разработке программного обеспечения.
                         </p>
+                        <div className="mt-4 p-4 bg-secondary border border-primary text-white rounded-lg">
+                            <p className="text-lg leading-relaxed">Открыт к предложениям о работе от 500к ₽&nbsp;/&nbsp;мес.</p>
+                        </div>
 
-                        <div className="flex items-start">
+                        <div className="flex items-start mt-4">
                             <div className="bg-primary bg-texture text-white p-4 flex-1 rounded-lg shadow-md">
                                 <p>Уральский государственный технический университет (УГТУ-УПИ)</p>
                                 <p className="text-sm text-white mt-1">Выпуск 2010 года, физико-технический
@@ -228,8 +231,8 @@ export default function Home() {
                     ))}
                 </ul>
                 <p className="mt-4 font-light italic">
-                    "Прошел путь от чистого кода к пониманию: ценность создается на стыке технологий,
-                    бизнес-модели и человеческих отношений"
+                    &ldquo;Прошел путь от чистого кода к пониманию: ценность создается на стыке технологий,
+                    бизнес-модели и человеческих отношений&ldquo;
                 </p>
             </section>
         </main>
