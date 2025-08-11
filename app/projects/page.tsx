@@ -1,0 +1,40 @@
+async function getProjects() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/projects`, {cache: "no-store"});
+    if (!res.ok) {
+        throw new Error('Failed to fetch projects');
+    }
+    return res.json();
+}
+
+export default async function ProjectsPage() {
+    const projects = await getProjects();
+
+    return (
+        <main className="max-w-5xl mx-auto px-6 pb-20">
+            <h1 className="text-4xl md:text-5xl font-bold my-4 text-primary text-center">Проекты</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                {projects.map((project: any) => (
+                    <div key={project.id} className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <div className="p-6">
+                            <h2 className="text-2xl font-bold text-primary mb-2">{project.name}</h2>
+                            <p className="text-secondary mb-4">{project.description}</p>
+                            <div className="flex flex-wrap gap-2 mb-4">
+                                {project.stack.map((tech: string) => (
+                                    <span key={tech} className="bg-gray-100 text-secondary text-sm font-medium px-2.5 py-0.5 rounded-full">{tech}</span>
+                                ))}
+                            </div>
+                            <div className="flex justify-end gap-4">
+                                {project.repo && (
+                                    <a href={project.repo} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Репозиторий</a>
+                                )}
+                                {project.url && (
+                                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Сайт</a>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </main>
+    );
+}

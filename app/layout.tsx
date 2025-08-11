@@ -1,5 +1,6 @@
 import type {Metadata} from "next";
 import "./globals.css";
+import MainMenu from "./components/MainMenu";
 
 export const metadata: Metadata = {
     title: "Персональный сайт Константина Потапова",
@@ -14,25 +15,11 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body
-            className={`antialiased`}
-        >
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800">
-            <header className="py-16 px-6">
-                <div className="max-w-5xl mx-auto text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
-                        Константин Потапов
-                    </h1>
-                    <p className="text-xl text-secondary mb-6">
-                        Инженер · Предприниматель · Исследователь
-                    </p>
-                    <div className="inline-flex items-center bg-primary bg-texture text-white rounded-full px-4 py-2 text-sm">
-                        <span className="w-3 h-3 bg-white rounded-full mr-2 animate-pulse"></span>
-                        <span>Инженерный подход к проектам</span>
-                    </div>
-                </div>
-            </header>
+            className={`antialiased`}>
+        <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800">
+            <MainMenu />
 
-            {children}
+            <main className="flex-grow">{children}</main>
 
             <footer className="bg-texture bg-black text-white py-10 px-6">
                 <div className="max-w-5xl mx-auto">
@@ -46,6 +33,8 @@ export default function RootLayout({
                                className="hover:font-black transition-colors">Telegram</a>
                             <a href="https://github.com/potapov-me" target="_blank" rel="noopener"
                                className="hover:font-black transition-colors">GitHub</a>
+                            <a href="https://habr.com/ru/users/potapov-me/" target="_blank" rel="noopener"
+                               className="hover:font-black transition-colors">Habr</a>
                             <a href="mailto:constantin@potapov.me" target="_blank" rel="noopener"
                                className="hover:font-black transition-colors">Email</a>
                         </div>
