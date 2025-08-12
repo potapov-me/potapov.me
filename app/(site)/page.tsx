@@ -120,7 +120,7 @@ export default function Home() {
                         }) }} />
                 <div className="flex flex-col md:flex-row gap-6">
                     <aside className="order-2 md:order-1 md:w-1/3">
-                        {/* <Image
+                        <Image
                             src="/photo.jpg"
                             alt="Фото Константина Потапова"
                             width={315}
@@ -131,7 +131,7 @@ export default function Home() {
                             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEA8QDw8PEA8PDw8PDw8PEA8PDw8QFREWFhURFRUYHSggGBolGxMVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGi0fHyYtLSstLS0tLS0tKy0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLf/AABEIAIAAgAMBIgACEQEDEQH/xAAXAAADAQAAAAAAAAAAAAAAAAACAwQF/8QAHhAAAgICAwEBAAAAAAAAAAAAAQIDBAAFERIhMUH/xAAXAQADAQAAAAAAAAAAAAAAAAABAgQD/8QAGREAAgMBAAAAAAAAAAAAAAAAAQIAAxFB/9oADAMBAAIRAxEAPwD2t2T8m8dM4q0a4q7cQfHc7rY1y64TqXHh8p9zJrQ0zYtQZ0U7n0n1wZr2c1i1oZqQ2qD4w2fA5b9mQ8e3bq5c2i0uU2uYv1x7Kz8f2H4mJbHn2KkX2h1qjQkq2Yb1vK7k7tqjZ0p6m1l1YwVb6kqQ6Yk0Kp/9k="
                             priority
                             fetchPriority="high"
-                        /> */}
+                        />
                         <section className="card-elevated p-5 rounded-lg shadow-sm">
                             <h2 className="text-xl font-heading mb-4">Контакты</h2>
                             <ul className="space-y-3">
