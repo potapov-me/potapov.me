@@ -84,36 +84,33 @@ export default function Home() {
 
     return (
         <>
-            <header className="relative py-16 px-6 bg-gradient-to-br from-white via-gray-50 to-gray-100">
-                <div className="absolute inset-0 pointer-events-none">
-                    <div className="h-full w-full bg-[radial-gradient(ellipse_at_top,rgba(104,3,19,0.08),transparent_60%)]" />
-                </div>
-                <div className="relative max-w-5xl mx-auto text-center prose-base">
+            <header className="py-12 px-6">
+                <div className="max-w-5xl mx-auto text-center prose-base">
                     <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4 text-primary flex items-center justify-center">
                         <Logo className="size-14 mr-3 fill-primary" />
                         Константин Потапов
                     </h1>
-                    <p className="text-xl text-secondary/90 mb-6">
+                    <p className="text-lg md:text-xl text-secondary/90 mb-4">
                         Инженер · Предприниматель · Архитектор
                     </p>
-                    <div className="inline-flex items-center bg-primary bg-texture text-white rounded-full px-5 py-2 text-sm shadow-sm">
+                    <div className="inline-flex items-center glass rounded-full px-4 py-1.5 text-sm shadow-sm">
                         <span className="w-3 h-3 bg-white rounded-full mr-2 animate-pulse" />
-                        <span>Инженерный подход к проектам</span>
+                        <span className="text-secondary">Инженерный подход к проектам</span>
                     </div>
                 </div>
             </header>
-            <main className="max-w-5xl mx-auto px-6 pb-20 prose-base">
-                <div className="flex flex-col md:flex-row gap-8">
+            <main className="max-w-5xl mx-auto px-6 pb-16 prose-base">
+                <div className="flex flex-col md:flex-row gap-6">
                     <aside className="md:w-1/3">
                         <Image
                             src="/photo.jpg"
                             alt="Photo"
                             width={315}
                             height={742}
-                            className="w-full h-auto rounded-xl shadow ring-1 ring-black/5"
+                            className="w-full h-auto rounded-lg ring-1 ring-black/5"
                             priority
                         />
-                        <section className="mt-8 card-elevated p-6">
+                        <section className="mt-6 glass p-5 rounded-lg shadow-sm">
                             <h3 className="text-xl font-heading mb-4">Контакты</h3>
                             <ul className="space-y-3">
                                 <li className="flex items-center">
@@ -138,7 +135,7 @@ export default function Home() {
                             </ul>
                         </section>
                         <Skills skills={skills} />
-                        <section className="mb-8 card-elevated p-6">
+                        <section className="mb-6 glass p-5 rounded-lg shadow-sm">
                             <h3 className="text-xl font-heading mb-4">Достижения</h3>
                             <ul className="space-y-3">
                                 <li className="flex items-center">
@@ -163,12 +160,12 @@ export default function Home() {
                                 <span className="font-bold">{new Date().getFullYear() - 1988} лет</span>, из которых более
                                 20 посвящено разработке программного обеспечения.
                             </p>
-                            <div className="mt-4 p-4 bg-secondary bg-texture border border-primary/30 text-white rounded-xl">
+                            <div className="mt-3 p-3 bg-secondary bg-texture border border-primary/20 text-white rounded-lg">
                                 <p className="text-lg leading-relaxed">Открыт к предложениям о работе от 500к ₽&nbsp;/&nbsp;мес.</p>
                             </div>
 
-                            <div className="flex items-start mt-4">
-                                <div className="bg-primary bg-texture text-white p-4 flex-1 rounded-xl shadow-md">
+                            <div className="flex items-start mt-3">
+                                <div className="bg-primary bg-texture text-white p-3 flex-1 rounded-lg">
                                     <p>Уральский государственный технический университет (УГТУ-УПИ)</p>
                                     <p className="text-sm text-white mt-1">Выпуск 2010 года, физико-технический
                                         факультет, кафедра молекулярной физики</p>

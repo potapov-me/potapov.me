@@ -2,7 +2,7 @@ import MainMenu from "../components/MainMenu";
 import {TimelineProvider} from "../contexts/TimelineContext";
 import {Toaster} from "../components/ui/toaster";
 import {FaTelegramPlane, FaGithub, FaEnvelope} from "react-icons/fa";
-import {SiHabr} from "react-icons/si";
+import {SiHabr, SiVk} from "react-icons/si";
 
 export default function RootLayout({
                                        children,
@@ -12,12 +12,12 @@ export default function RootLayout({
     return (
         <>
             <TimelineProvider>
-                <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 prose-base">
+                <div className="min-h-screen flex flex-col bg-gradient-to-br from-white via-gray-50 to-gray-100 text-gray-800 prose-base">
                     <MainMenu/>
 
                     <main className="flex-grow">{children}</main>
 
-                    <footer className="bg-texture bg-black text-white py-10 px-6 mt-10">
+                    <footer className="bg-black text-white py-10 px-6 mt-8">
                         <div className="max-w-5xl mx-auto">
                             <div className="flex flex-col md:flex-row justify-between items-center">
                                 <div className="mb-4 md:mb-0">
@@ -35,6 +35,8 @@ export default function RootLayout({
                                        className="text-2xl hover:text-primary transition-colors"><SiHabr/></a>
                                     <a href="mailto:constantin@potapov.me" target="_blank" rel="noopener" aria-label="Email"
                                        className="text-2xl hover:text-primary transition-colors"><FaEnvelope/></a>
+                                    <a href="https://vk.com/potapov_me" target="_blank" rel="noopener" aria-label="Email"
+                                       className="text-2xl hover:text-primary transition-colors"><SiVk/></a>
                                 </div>
                             </div>
                             <div className="mt-8 text-center text-sm">

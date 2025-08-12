@@ -22,11 +22,11 @@ export const Skills = ({skills}: SkillsProps) => {
                 {skills.map((category, index) => (
                     <div key={index}>
                         <h4 className="text-lg font-heading mb-2 text-primary">{category.category}</h4>
-                        <ul className="flex flex-wrap gap-3">
+                        <ul className="flex flex-wrap gap-2.5">
                             {category.items.map((skill, skillIndex) => (
-                                <li key={skillIndex} title={skill.name} className="flex items-center card-elevated py-2 px-3">
-                                    {skill.icon && <skill.icon className="text-2xl text-secondary"/>}
-                                    {!skill.hideName && <span className={skill.icon && 'ml-2'}>{skill.name}</span>}
+                                <li key={skillIndex} title={skill.name} className="flex items-center card-elevated py-1.5 px-2.5">
+                                    {skill.icon && <skill.icon className="text-xl text-secondary"/>}
+                                    {!skill.hideName && <span className={skill.icon && 'ml-1.5'}>{skill.name}</span>}
                                 </li>
                             ))}
                         </ul>

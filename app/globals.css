@@ -44,17 +44,12 @@ a {
 }
 
 /* Glass / card utilities */
-.glass {
-  @apply bg-white/60 backdrop-blur supports-[backdrop-filter]:bg-white/50;
-}
-
-.card-elevated {
-  @apply bg-white rounded-xl shadow-sm ring-1 ring-black/5;
-}
+.glass { @apply bg-white/50 backdrop-blur-md supports-[backdrop-filter]:bg-white/40 border border-white/20; }
+.card-elevated { @apply bg-white rounded-lg ring-1 ring-black/5; }
 
 /* Smooth transitions */
 .transition-colors-200 { @apply transition-colors duration-200; }
-.transition-transform-300 { @apply transition-transform duration-300; }
+.transition-transform-300 { @apply transition-transform duration-200; }
 
 /* Better focus outline */
 :focus-visible {
