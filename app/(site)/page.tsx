@@ -132,7 +132,7 @@ export default function Home() {
                             priority
                             fetchPriority="high"
                         />
-                        <section className="card-elevated p-5 rounded-lg shadow-sm">
+                        <section className="mt-6 card-elevated p-5 rounded-lg shadow-sm">
                             <h2 className="text-xl font-heading mb-4">Контакты</h2>
                             <ul className="space-y-3">
                                 <li className="flex items-center">
