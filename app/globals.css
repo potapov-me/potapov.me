@@ -56,3 +56,9 @@ a {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
+
+/* Defer rendering cost below the fold */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
+}

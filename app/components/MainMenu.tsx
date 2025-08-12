@@ -4,7 +4,6 @@ import Logo from "@/public/logo.svg";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useState} from "react";
-import { FaUser } from 'react-icons/fa';
 
 
 const MainMenu = () => {
@@ -15,11 +14,11 @@ const MainMenu = () => {
         {href: "/", label: "Обо мне"},
         {href: "/projects", label: "Проекты"},
         {href: "/contact", label: "Контакты"},
-        {href: "/admin", label: "Админка", isAdmin: true, icon: FaUser},
+        {href: "/admin", label: "Админка", isAdmin: true},
     ];
 
     return (
-        <nav className="sticky top-0 z-40 glass shadow-sm">
+        <nav className="sticky top-0 z-40 bg-white/85 shadow-sm">
             <div className="max-w-5xl mx-auto px-6 prose-base">
                 <div className="flex justify-between items-center h-16">
                     <Link prefetch={false} href="/" className="fill-primary hover:fill-primary-dark hover:text-primary-dark text-2xl font-bold text-primary flex">
@@ -37,8 +36,7 @@ const MainMenu = () => {
                                         : "text-secondary hover:bg-gray-100"
                                 }`}
                             >
-                                {item.icon && <item.icon className="text-xl"/>}
-                                { !item.isAdmin && item.label}
+                                {item.label}
                             </Link>
                         ))}
                     </div>

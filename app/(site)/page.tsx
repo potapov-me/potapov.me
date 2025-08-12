@@ -1,8 +1,7 @@
-'use client';
-
 import Image from "next/image";
 import Script from "next/script";
-import {TimelineItemComponent} from "../components/TimelineItem";
+import TimelineClient from "./_components/TimelineClient";
+import TimelineStatsClient from "./_components/TimelineStatsClient";
 import {
     FaDocker,
     FaGitAlt,
@@ -23,15 +22,12 @@ import {
     SiWagtail
 } from "react-icons/si";
 import { SkillCategory, Skills } from "../components/Skills";
-import { useTimeline } from "../contexts/TimelineContext";
-import { getProjectWordForm } from "@/app/lib/utils";
 import { FsdIcon } from "../components/icons/FsdIcon";
 import { AgileIcon } from "../components/icons/AgileIcon";
 import { KanbanIcon } from "../components/icons/KanbanIcon";
 import { ScrumIcon } from "../components/icons/ScrumIcon";
 
 export default function Home() {
-    const { timelineItems: timelineData } = useTimeline();
     
     const philosophy = [
         "аналитическое мышление",
@@ -123,19 +119,21 @@ export default function Home() {
                             }
                         }) }} />
                 <div className="flex flex-col md:flex-row gap-6">
-                    <aside className="md:w-1/3">
+                    <aside className="order-2 md:order-1 md:w-1/3">
                         <Image
                             src="/photo.jpg"
                             alt="Фото Константина Потапова"
                             width={315}
                             height={742}
                             className="w-full h-auto rounded-lg ring-1 ring-black/5"
-                            sizes="(max-width: 768px) 100vw, 315px"
+                            sizes="(max-width: 768px) 50vw, 315px"
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEA8QDw8PEA8PDw8PDw8PEA8PDw8QFREWFhURFRUYHSggGBolGxMVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGi0fHyYtLSstLS0tLS0tKy0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLf/AABEIAIAAgAMBIgACEQEDEQH/xAAXAAADAQAAAAAAAAAAAAAAAAACAwQF/8QAHhAAAgICAwEBAAAAAAAAAAAAAQIDBAAFERIhMUH/xAAXAQADAQAAAAAAAAAAAAAAAAABAgQD/8QAGREAAgMBAAAAAAAAAAAAAAAAAQIAAxFB/9oADAMBAAIRAxEAPwD2t2T8m8dM4q0a4q7cQfHc7rY1y64TqXHh8p9zJrQ0zYtQZ0U7n0n1wZr2c1i1oZqQ2qD4w2fA5b9mQ8e3bq5c2i0uU2uYv1x7Kz8f2H4mJbHn2KkX2h1qjQkq2Yb1vK7k7tqjZ0p6m1l1YwVb6kqQ6Yk0Kp/9k="
                             priority
                             fetchPriority="high"
                         />
-                        <section className="mt-6 glass p-5 rounded-lg shadow-sm">
-                            <h3 className="text-xl font-heading mb-4">Контакты</h3>
+                        <section className="mt-6 card-elevated p-5 rounded-lg shadow-sm">
+                            <h2 className="text-xl font-heading mb-4">Контакты</h2>
                             <ul className="space-y-3">
                                 <li className="flex items-center">
                                     <span className="font-bold mr-2">Email:</span>
@@ -159,7 +157,7 @@ export default function Home() {
                             </ul>
                         </section>
                         <Skills skills={skills} />
-                        <section className="mb-6 glass p-5 rounded-lg shadow-sm">
+                        <section className="mb-6 card-elevated p-5 rounded-lg shadow-sm below-fold">
                             <h3 className="text-xl font-heading mb-4">Достижения</h3>
                             <ul className="space-y-3">
                                 <li className="flex items-center">
@@ -172,24 +170,24 @@ export default function Home() {
                                 </li>
                                 <li className="flex items-center">
                                     <span className="text-2xl mr-3">🚀</span>
-                                    <span>Реализовал {timelineData.filter(item => item.isStartup).length} {getProjectWordForm(timelineData.filter(item => item.isStartup).length)}</span>
+                                    <TimelineStatsClient />
                                 </li>
                             </ul>
                         </section>
                     </aside>
-                    <div className="md:w-2/3">
+                    <div className="order-1 md:order-2 md:w-2/3">
                         {/* Блок "Обо мне" */}
                         <section className="mb-16">
                             <p className="text-lg leading-relaxed">
                                 <span className="font-bold">{new Date().getFullYear() - 1988} лет</span>, из которых более
                                 20 посвящено разработке программного обеспечения.
                             </p>
-                            <div className="mt-3 p-3 bg-secondary bg-texture border border-primary/20 text-white rounded-lg">
+                            <div className="mt-3 p-3 bg-secondary border border-primary/20 text-white rounded-lg">
                                 <p className="text-lg leading-relaxed">Открыт к предложениям о сотрудничестве от 500к ₽&nbsp;/&nbsp;мес.</p>
                             </div>
 
                             <div className="flex items-start mt-3">
-                                <div className="bg-primary bg-texture text-white p-3 flex-1 rounded-lg">
+                                <div className="bg-primary text-white p-3 flex-1 rounded-lg">
                                     <p>Уральский государственный технический университет (УГТУ-УПИ)</p>
                                     <p className="text-sm text-white mt-1">Выпуск 2010 года, физико-технический
                                         факультет, кафедра молекулярной физики</p>
@@ -197,27 +195,11 @@ export default function Home() {
                             </div>
                         </section>
 
-                        <section className="mb-16">
-                            <h2 className="font-heading text-3xl font-bold mb-6 text-center">Профессиональная эволюция</h2>
-                            <div className="space-y-10">
-                                {timelineData.map((item, index) => (
-                                    <TimelineItemComponent
-                                        key={index}
-                                        id={item.id}
-                                        year={item.year}
-                                        title={item.title}
-                                        description={item.description}
-                                        lessons={item.lessons}
-                                        isBlink={item.isBlink}
-                                        isStartup={item.isStartup}
-                                    />
-                                ))}
-                            </div>
-                        </section>
+                        <TimelineClient />
                     </div>
                 </div>
                 {/* Философия */}
-                <section className="bg-secondary p-8 text-white rounded-xl shadow-sm">
+                <section className="bg-secondary p-8 text-white rounded-xl shadow-sm below-fold">
                     <h2 className="font-heading text-2xl font-bold mb-4">Моя философия развития</h2>
                     <ul className="list-disc pl-5 space-y-2 text-white">
                         {philosophy.map((item, index) => (
