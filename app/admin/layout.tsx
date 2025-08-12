@@ -13,7 +13,7 @@ export default function AdminLayout({children}: { children: React.ReactNode }) {
     };
 
     return (
-        <div className="max-w-4xl mx-auto pt-10">
+        <div className="max-w-4xl mx-auto p-10 my-8">
             <div className="flex justify-between items-center mb-4">
                 <Breadcrumbs />
                 <button onClick={handleLogout} className="bg-primary text-white px-4 py-2 rounded-md hover:bg-secondary flex items-center">

@@ -40,7 +40,8 @@ export default function RootLayout({
                         </div>
                     </div>
                     <div className="mt-8 text-center text-sm">
-                        © {new Date().getFullYear()} Все права защищены. История продолжается...
+                        ИП Потапов К.С. ОГРНИП 312668617300033 <br />
+                        © {new Date().getFullYear()} Все права защищены.
                     </div>
                 </div>
             </footer>

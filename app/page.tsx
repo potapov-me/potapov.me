@@ -6,7 +6,7 @@ import {
     FaLinux,
     FaPython,
     FaReact,
-    FaVuejs
+    FaVuejs,
 } from "react-icons/fa";
 import {
     SiDjango,

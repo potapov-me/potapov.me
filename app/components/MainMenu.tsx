@@ -3,6 +3,8 @@
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useState} from "react";
+import { FaUser } from 'react-icons/fa';
+
 
 const MainMenu = () => {
     const pathname = usePathname();
@@ -12,7 +14,7 @@ const MainMenu = () => {
         {href: "/", label: "Обо мне"},
         {href: "/projects", label: "Проекты"},
         {href: "/contact", label: "Контакты"},
-        {href: "/admin", label: "Админка"},
+        {href: "/admin", label: "Админка", isAdmin: true, icon: FaUser},
     ];
 
     return (
@@ -33,7 +35,8 @@ const MainMenu = () => {
                                         : "text-secondary hover:bg-gray-100"
                                 }`}
                             >
-                                {item.label}
+                                {item.icon && <item.icon className="text-xl"/>}
+                                { !item.isAdmin && item.label}
                             </Link>
                         ))}
                     </div>
