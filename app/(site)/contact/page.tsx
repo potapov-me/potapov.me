@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Контакты",
+    description: "Как связаться с Константином Потаповым: email, Telegram и другие каналы.",
+    alternates: { canonical: "/contact" },
+};
+
 export default function ContactPage() {
     return (
         <main className="max-w-5xl mx-auto px-6 pb-20 prose-base">

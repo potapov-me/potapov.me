@@ -1,6 +1,7 @@
 'use client';
 
 import Image from "next/image";
+import Script from "next/script";
 import {TimelineItemComponent} from "../components/TimelineItem";
 import {
     FaDocker,
@@ -94,20 +95,38 @@ export default function Home() {
                         Константин Потапов
                     </h1>
                     <p className="text-lg md:text-xl text-secondary/90 mb-4">
-                        Инженер · Предприниматель · Software Architect
+                        Инженер · Архитектор · Основатель
                     </p>
                     <div className="inline-flex items-center glass rounded-full px-4 py-1.5 text-sm shadow-sm">
                         <span className="w-3 h-3 bg-primary rounded-full mr-2 animate-pulse" />
-                        <span className="text-secondary">Инженерный подход к проектам</span>
+                        <span className="text-secondary">Создаю технологии, которые меняют рынки</span>
                     </div>
                 </div>
             </header>
             <main className="max-w-5xl mx-auto px-6 pb-16 prose-base">
+                <Script id="ld-org" type="application/ld+json"
+                        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Person",
+                            name: "Константин Потапов",
+                            url: (process.env.NEXT_PUBLIC_URL || 'https://potapov.me'),
+                            sameAs: [
+                                "https://t.me/potapov_me",
+                                "https://github.com/potapov-me",
+                                "https://habr.com/ru/users/potapov-me/",
+                                "https://vk.com/potapov_me"
+                            ],
+                            jobTitle: "Software Architect",
+                            worksFor: {
+                                "@type": "Organization",
+                                name: "Self-employed"
+                            }
+                        }) }} />
                 <div className="flex flex-col md:flex-row gap-6">
                     <aside className="md:w-1/3">
                         <Image
                             src="/photo.jpg"
-                            alt="Photo"
+                            alt="Фото Константина Потапова"
                             width={315}
                             height={742}
                             className="w-full h-auto rounded-lg ring-1 ring-black/5"
@@ -164,7 +183,7 @@ export default function Home() {
                                 20 посвящено разработке программного обеспечения.
                             </p>
                             <div className="mt-3 p-3 bg-secondary bg-texture border border-primary/20 text-white rounded-lg">
-                                <p className="text-lg leading-relaxed">Открыт к предложениям о работе от 500к ₽&nbsp;/&nbsp;мес.</p>
+                                <p className="text-lg leading-relaxed">Открыт к предложениям о сотрудничестве от 500к ₽&nbsp;/&nbsp;мес.</p>
                             </div>
 
                             <div className="flex items-start mt-3">

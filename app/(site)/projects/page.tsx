@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import {Project} from "@/app/types";
+
+export const metadata: Metadata = {
+    title: "Проекты",
+    description: "Реализованные и текущие проекты: стек, ссылки на репозитории и сайты.",
+    alternates: { canonical: "/projects" },
+};
 
 async function getProjects(): Promise<Project[]> {
 
