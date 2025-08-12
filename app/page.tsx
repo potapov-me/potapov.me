@@ -22,11 +22,11 @@ import {
     SiWagtail
 } from "react-icons/si";
 import { SkillCategory, Skills } from "./components/Skills";
-import { useState, useEffect } from 'react';
-import {TimelineItem, TimelineItem as TimelineItemType} from './types';
-
+import { useTimeline } from "./contexts/TimelineContext";
 
 export default function Home() {
+    const { timelineItems: timelineData, isLoading } = useTimeline();
+    
     const philosophy = [
         "аналитическое мышление",
         "надежность",
@@ -80,27 +80,6 @@ export default function Home() {
         }
     ];
 
-    const [timelineData, setTimelineData] = useState<TimelineItem[]>([]);
-
-    useEffect(() => {
-        const fetchTimeline = async () => {
-            const res = await fetch('/api/timeline');
-            if (res.ok) {
-                const data: TimelineItemType[] = await res.json();
-                const formattedData = data.map((item: TimelineItemType) => ({
-                    ...item,
-                    year: item.year,
-                }));
-                // Sort by year
-                formattedData.sort((a, b) => a.year - b.year);
-                setTimelineData(formattedData);
-            } else {
-                console.error('Failed to fetch timeline data');
-            }
-        };
-        fetchTimeline();
-    }, []);
-
     return (
         <>
             <header className="py-16 px-6">
@@ -126,6 +105,7 @@ export default function Home() {
                             width={315}
                             height={742}
                             className="w-full h-auto rounded-lg"
+                            priority
                         />
                         <section className="mt-8 bg-gray-100 p-6 rounded-lg shadow-md">
                             <h3 className="text-xl font-bold mb-4">Контакты</h3>

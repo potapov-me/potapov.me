@@ -1,30 +1,64 @@
-import {NextResponse} from "next/server";
-import * as fs from "fs/promises";
-import * as path from "path";
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/app/lib/db";
+import { z } from "zod";
 
-import {Project} from "@/app/types";
+// Validation schema for project creation
+const projectSchema = z.object({
+  name: z.string().min(1),
+  description: z.string(),
+  url: z.preprocess(
+    (val) => (val === "" || val === null ? undefined : val),
+    z.string().url().optional()
+  ),
+  icon: z.string(),
+  stack: z.array(z.string()),
+  repo: z.preprocess(
+    (val) => (val === "" || val === null ? undefined : val),
+    z.string().url().optional()
+  ),
+});
 
-
-export async function GET() {
-    const filePath = path.join(process.cwd(), 'data', 'projects.json');
-    const jsonData = await fs.readFile(filePath, 'utf-8');
-
-    const projects: Project[] = JSON.parse(jsonData);
-
+export async function GET(req: NextRequest) {
+  try {
+    const projects = await prisma.project.findMany();
     return NextResponse.json(projects);
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return NextResponse.json(
+      { message: "Error fetching projects" },
+      { status: 500 }
+    );
+  }
 }
 
-export async function POST(req: Request) {
-    const newProject = await req.json();
-    const filePath = path.join(process.cwd(), 'data', 'projects.json');
-    const jsonData = await fs.readFile(filePath, 'utf-8');
-    const projects: Project[] = JSON.parse(jsonData);
+export async function POST(req: NextRequest) {
+  try {
+    const data = await req.json();
+    // Validate input data
+    const validationResult = projectSchema.safeParse(data);
+    if (!validationResult.success) {
+      return NextResponse.json(
+        { message: "Invalid data", errors: validationResult.error.format() },
+        { status: 400 }
+      );
+    }
 
-    newProject.id = projects.length > 0 ? Math.max(...projects.map((p: Project) => p.id)) + 1 : 1;
+    const { stack, ...rest } = validationResult.data;
 
-    projects.push(newProject);
+    // Create new project
+    const newProject = await prisma.project.create({
+      data: {
+        ...rest,
+        stack: stack.join(","),
+      },
+    });
 
-    await fs.writeFile(filePath, JSON.stringify(projects, null, 2));
-
-    return NextResponse.json(newProject, {status: 201});
+    return NextResponse.json(newProject, { status: 201 });
+  } catch (error) {
+    console.error("Error creating project:", error);
+    return NextResponse.json(
+      { message: "Error creating project" },
+      { status: 500 }
+    );
+  }
 }

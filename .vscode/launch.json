@@ -1,0 +1,24 @@
+{
+    // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+    // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+    // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "chrome",
+            "request": "launch",
+            "port": 9229,
+            "name": "Запустить Chrome на localhost",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "sourceMapPathOverrides": {
+              "webpack://_N_E/./*": "${workspaceFolder}/*",
+              "webpack://_N_E/app/*": "${workspaceFolder}/app/*",
+              "webpack://_N_E/./app/*": "${workspaceFolder}/app/*",
+              "webpack:///./*": "${workspaceFolder}/*",
+              "webpack:///app/*": "${workspaceFolder}/app/*"
+            }
+        }
+    ]
+}

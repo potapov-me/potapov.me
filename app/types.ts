@@ -4,7 +4,7 @@ export interface Project {
   description: string;
   url: string;
   icon: string;
-  stack: string[];
+  stack: string;
   repo?: string;
 }
 

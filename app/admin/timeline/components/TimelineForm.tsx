@@ -11,10 +11,12 @@ interface TimelineFormProps {
 }
 
 export default function TimelineForm({ timelineItem, onSave, onCancel }: TimelineFormProps) {
-  const [formData, setFormData] = useState<Partial<TimelineItem>>(timelineItem || { title: '', description: '', link: '', isBlink: false, isStartup: false });
+  const [formData, setFormData] = useState<Partial<TimelineItem>>(timelineItem || { title: '', description: '', link: '', isBlink: false, isStartup: false, lessons: '' });
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    setFormData(timelineItem || { title: '', description: '', link: '', isBlink: false, isStartup: false });
+    setFormData(timelineItem || { title: '', description: '', link: '', isBlink: false, isStartup: false, lessons: '' });
+    setErrors({}); // Clear errors on item change
   }, [timelineItem]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -23,6 +25,7 @@ export default function TimelineForm({ timelineItem, onSave, onCancel }: Timelin
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
     }));
+    setErrors(prev => ({ ...prev, [name]: '' })); // Clear error when user types
   };
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,11 +33,34 @@ export default function TimelineForm({ timelineItem, onSave, onCancel }: Timelin
       ...prev,
       year: Number(e.target.value),
     }));
+    setErrors(prev => ({ ...prev, year: '' })); // Clear error when user types
+  };
+
+  const validateForm = () => {
+    const newErrors: { [key: string]: string } = {};
+    if (!formData.year) {
+      newErrors.year = 'Год обязателен.';
+    } else if (formData.year < 1900 || formData.year > new Date().getFullYear()) {
+      newErrors.year = `Год должен быть между 1900 и ${new Date().getFullYear()}.`;
+    }
+    if (!formData.title || formData.title.trim() === '') {
+      newErrors.title = 'Заголовок обязателен.';
+    }
+    if (!formData.description || formData.description.trim() === '') {
+      newErrors.description = 'Описание обязательно.';
+    }
+    if (formData.link && !/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(formData.link)) {
+      newErrors.link = 'Введите корректный URL.';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    if (validateForm()) {
+      onSave(formData);
+    }
   };
 
   return (
@@ -53,9 +79,10 @@ export default function TimelineForm({ timelineItem, onSave, onCancel }: Timelin
               title='Введите год'
               value={formData.year || ''}
               onChange={handleYearChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className={`mt-1 block w-full border ${errors.year ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm p-2`}
               required
             />
+            {errors.year && <p className="text-error text-sm mt-1">{errors.year}</p>}
           </div>
           <div>
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">Заголовок</label>
@@ -65,9 +92,10 @@ export default function TimelineForm({ timelineItem, onSave, onCancel }: Timelin
               name="title"
               value={formData.title || ''}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className={`mt-1 block w-full border ${errors.title ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm p-2`}
               required
             />
+            {errors.title && <p className="text-error text-sm mt-1">{errors.title}</p>}
           </div>
           <div>
             <label htmlFor="description" className="block text-sm font-medium text-gray-700">Описание</label>
@@ -76,10 +104,11 @@ export default function TimelineForm({ timelineItem, onSave, onCancel }: Timelin
               name="description"
               value={formData.description || ''}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className={`mt-1 block w-full border ${errors.description ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm p-2`}
               rows={3}
               required
             ></textarea>
+            {errors.description && <p className="text-error text-sm mt-1">{errors.description}</p>}
           </div>
           <div>
             <label htmlFor="link" className="block text-sm font-medium text-gray-700">Ссылка (необязательно)</label>
@@ -89,8 +118,9 @@ export default function TimelineForm({ timelineItem, onSave, onCancel }: Timelin
               name="link"
               value={formData.link || ''}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className={`mt-1 block w-full border ${errors.link ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm p-2`}
             />
+            {errors.link && <p className="text-error text-sm mt-1">{errors.link}</p>}
           </div>
           <div>
             <label htmlFor="lessons" className="block text-sm font-medium text-gray-700">Уроки (необязательно)</label>

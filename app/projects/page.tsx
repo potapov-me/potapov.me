@@ -22,8 +22,8 @@ export default async function ProjectsPage() {
                             <h2 className="text-2xl font-bold text-primary mb-2">{project.name}</h2>
                             <p className="text-secondary mb-4">{project.description}</p>
                             <div className="flex flex-wrap gap-2 mb-4">
-                                {project.stack.map((tech: string) => (
-                                    <span key={tech} className="bg-gray-100 text-secondary text-sm font-medium px-2.5 py-0.5 rounded-full">{tech}</span>
+                                {project.stack.split(',').map((tech: string) => (
+                                    <span key={tech} className="bg-gray-100 text-secondary text-sm font-medium px-2.5 py-0.5 rounded-full">{tech.trim()}</span>
                                 ))}
                             </div>
                             <div className="flex justify-end gap-4">

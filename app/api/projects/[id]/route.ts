@@ -1,44 +1,127 @@
 import { NextRequest, NextResponse } from "next/server";
-import * as fs from "fs/promises";
-import * as path from "path";
-import { Project } from "@/app/types";
+import { prisma } from "@/app/lib/db";
+import { z } from "zod";
 
-export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-    const resolvedParams = await params;
-    const id = parseInt(resolvedParams.id, 10);
-    const updatedProject = await req.json();
-    const filePath = path.join(process.cwd(), 'data', 'projects.json');
-    const jsonData = await fs.readFile(filePath, 'utf-8');
-    const projects: Project[] = JSON.parse(jsonData);
+const projectSchema = z.object({
+  name: z.string().min(1),
+  description: z.string(),
+  url: z.preprocess(
+    (val) => (val === "" || val === null ? undefined : val),
+    z.string().url().optional()
+  ),
+  icon: z.string(),
+  stack: z.array(z.string()),
+  repo: z.preprocess(
+    (val) => (val === "" || val === null ? undefined : val),
+    z.string().url().optional()
+  ),
+});
 
-    const projectIndex = projects.findIndex((p: Project) => p.id === id);
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const project = await prisma.project.findUnique({
+      where: { id: (await params).id },
+    });
 
-    if (projectIndex === -1) {
-        return new NextResponse("Project not found", { status: 404 });
+    if (!project) {
+      return NextResponse.json(
+        { message: "Project not found" },
+        { status: 404 }
+      );
     }
 
-    projects[projectIndex] = { ...projects[projectIndex], ...updatedProject };
-
-    await fs.writeFile(filePath, JSON.stringify(projects, null, 2));
-
-    return NextResponse.json(projects[projectIndex]);
+    return NextResponse.json(project);
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    return NextResponse.json(
+      { message: "Error fetching project" },
+      { status: 500 }
+    );
+  }
 }
 
-
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
     const resolvedParams = await params;
-    const id = parseInt(resolvedParams.id, 10);
-    const filePath = path.join(process.cwd(), 'data', 'projects.json');
-    const jsonData = await fs.readFile(filePath, 'utf-8');
-    const projects: Project[] = JSON.parse(jsonData);
 
-    const newProjects = projects.filter((p: Project) => p.id !== id);
+    const data = await req.json();
 
-    if (projects.length === newProjects.length) {
-        return new NextResponse("Project not found", { status: 404 });
+    const validationResult = projectSchema.safeParse(data);
+
+    if (!validationResult.success) {
+      return NextResponse.json(
+        { message: "Invalid data", errors: validationResult.error.format() },
+        { status: 400 }
+      );
     }
 
-    await fs.writeFile(filePath, JSON.stringify(newProjects, null, 2));
+    const existingProject = await prisma.project.findUnique({
+      where: { id: resolvedParams.id },
+    });
 
-    return NextResponse.json({ message: "Project deleted" });
+    if (!existingProject) {
+      return NextResponse.json(
+        { message: "Project not found" },
+        { status: 404 }
+      );
+    }
+
+    const { stack, ...rest } = validationResult.data;
+
+    const updatedProject = await prisma.project.update({
+      where: { id: resolvedParams.id },
+      data: {
+        ...rest,
+        stack: stack.join(","),
+      },
+    });
+
+    return NextResponse.json(updatedProject);
+  } catch (error) {
+    console.error("Error updating project:", error);
+    return NextResponse.json(
+      { message: "Error updating project" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const resolvedParams = await params;
+    const existingProject = await prisma.project.findUnique({
+      where: { id: resolvedParams.id },
+    });
+
+    if (!existingProject) {
+      return NextResponse.json(
+        { message: "Project not found" },
+        { status: 404 }
+      );
+    }
+
+    await prisma.project.delete({
+      where: { id: resolvedParams.id },
+    });
+
+    return NextResponse.json(
+      { message: "Project deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting project:", error);
+    return NextResponse.json(
+      { message: "Error deleting project" },
+      { status: 500 }
+    );
+  }
 }

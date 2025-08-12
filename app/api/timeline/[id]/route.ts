@@ -1,75 +1,126 @@
-import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/app/lib/db";
+import { z } from "zod";
 
-const timelineFilePath = path.join(process.cwd(), 'data', 'timeline.json');
+// Validation schema
+const timelineItemSchema = z.object({
+  year: z.number().int().positive(),
+  title: z.string().min(1),
+  description: z.string(),
+  lessons: z.string().optional(),
+  isBlink: z.boolean().optional(),
+  isStartup: z.boolean().optional(),
+  link: z.preprocess(
+    (val) => (val === "" || val === null ? undefined : val),
+    z.string().url().optional()
+  ),
+});
 
-import { TimelineItem } from '../../../types';
-
-function readTimeline(): TimelineItem[] {
-  const data = fs.readFileSync(timelineFilePath, 'utf-8');
-  return JSON.parse(data);
-}
-
-function writeTimeline(timeline: TimelineItem[]) {
-  fs.writeFileSync(timelineFilePath, JSON.stringify(timeline, null, 2), 'utf-8');
-}
-
-export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const resolvedParams = await params;
-    const { id } = resolvedParams;
-    const timeline = readTimeline();
-    const timelineItem = timeline.find((item: TimelineItem) => item.id === id);
+    const timelineItem = await prisma.timelineItem.findUnique({
+      where: { id: resolvedParams.id },
+    });
 
     if (!timelineItem) {
-      return NextResponse.json({ message: 'Timeline item not found' }, { status: 404 });
+      return NextResponse.json(
+        { message: "Timeline item not found" },
+        { status: 404 }
+      );
     }
+
     return NextResponse.json(timelineItem);
   } catch (error) {
-    return NextResponse.json({ message: 'Error reading timeline item' }, { status: 500 });
+    console.error("Error fetching timeline item:", error);
+    return NextResponse.json(
+      { message: "Error fetching timeline item" },
+      { status: 500 }
+    );
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const resolvedParams = await params;
-    const { id } = resolvedParams;
-    const updatedItem: TimelineItem = await req.json();
-    const timeline = readTimeline();
+    const data = await req.json();
 
-    const index = timeline.findIndex((item: TimelineItem) => item.id === id);
-
-    if (index === -1) {
-      return NextResponse.json({ message: 'Timeline item not found' }, { status: 404 });
+    // Validate input data
+    const validationResult = timelineItemSchema.safeParse(data);
+    if (!validationResult.success) {
+      return NextResponse.json(
+        { message: "Invalid data", errors: validationResult.error.format() },
+        { status: 400 }
+      );
     }
 
-    timeline[index] = { ...timeline[index], ...updatedItem, id }; // Ensure ID remains the same
-    writeTimeline(timeline);
-    return NextResponse.json(timeline[index]);
+    // Check if item exists
+    const existingItem = await prisma.timelineItem.findUnique({
+      where: { id: resolvedParams.id },
+    });
+
+    if (!existingItem) {
+      return NextResponse.json(
+        { message: "Timeline item not found" },
+        { status: 404 }
+      );
+    }
+
+    // Update the item
+    const updatedItem = await prisma.timelineItem.update({
+      where: { id: resolvedParams.id },
+      data: validationResult.data,
+    });
+
+    return NextResponse.json(updatedItem);
   } catch (error) {
-    console.error('Error updating timeline item:', error);
-    return NextResponse.json({ message: 'Error updating timeline item' }, { status: 500 });
+    console.error("Error updating timeline item:", error);
+    return NextResponse.json(
+      { message: "Error updating timeline item" },
+      { status: 500 }
+    );
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const resolvedParams = await params;
-    const { id } = resolvedParams;
-    let timeline = readTimeline();
 
-    const initialLength = timeline.length;
-    timeline = timeline.filter((item: TimelineItem) => item.id !== id);
+    // Check if item exists
+    const existingItem = await prisma.timelineItem.findUnique({
+      where: { id: resolvedParams.id },
+    });
 
-    if (timeline.length === initialLength) {
-      return NextResponse.json({ message: 'Timeline item not found' }, { status: 404 });
+    if (!existingItem) {
+      return NextResponse.json(
+        { message: "Timeline item not found" },
+        { status: 404 }
+      );
     }
 
-    writeTimeline(timeline);
-    return NextResponse.json({ message: 'Timeline item deleted' }, { status: 200 });
+    // Delete the item
+    await prisma.timelineItem.delete({
+      where: { id: resolvedParams.id },
+    });
+
+    return NextResponse.json(
+      { message: "Timeline item deleted successfully" },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error('Error deleting timeline item:', error);
-    return NextResponse.json({ message: 'Error deleting timeline item' }, { status: 500 });
+    console.error("Error deleting timeline item:", error);
+    return NextResponse.json(
+      { message: "Error deleting timeline item" },
+      { status: 500 }
+    );
   }
 }
