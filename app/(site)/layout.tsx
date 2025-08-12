@@ -12,16 +12,16 @@ export default function RootLayout({
     return (
         <>
             <TimelineProvider>
-                <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800">
+                <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 prose-base">
                     <MainMenu/>
 
                     <main className="flex-grow">{children}</main>
 
-                    <footer className="bg-texture bg-black text-white py-10 px-6">
+                    <footer className="bg-texture bg-black text-white py-10 px-6 mt-10">
                         <div className="max-w-5xl mx-auto">
                             <div className="flex flex-col md:flex-row justify-between items-center">
                                 <div className="mb-4 md:mb-0">
-                                    <h3 className="text-xl font-bold text-white">Константин Потапов</h3>
+                                    <h3 className="text-xl font-heading font-bold text-white">Константин Потапов</h3>
                                     <p>Инженерный подход к проектам</p>
                                 </div>
                                 <div className="flex space-x-4">

@@ -13,11 +13,11 @@ export default async function ProjectsPage() {
     const projects = await getProjects();
 
     return (
-        <main className="max-w-5xl mx-auto px-6 pb-20">
-            <h1 className="text-4xl md:text-5xl font-bold my-4 text-primary text-center">Проекты</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <main className="max-w-5xl mx-auto px-6 pb-20 prose-base">
+            <h1 className="font-heading text-4xl md:text-5xl font-bold my-4 text-primary text-center">Проекты</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                 {projects.map((project) => (
-                    <div key={project.id} className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <div key={project.id} className="card-elevated overflow-hidden hover:shadow-md transition-transform-300 hover:-translate-y-0.5">
                         <div className="p-6">
                             <h2 className="text-2xl font-bold text-primary mb-2">{project.name}</h2>
                             <p className="text-secondary mb-4">{project.description}</p>

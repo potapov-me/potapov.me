@@ -19,19 +19,19 @@ const MainMenu = () => {
     ];
 
     return (
-        <nav className="bg-gray-100 bg-texture shadow-md">
-            <div className="max-w-5xl mx-auto px-6">
+        <nav className="sticky top-0 z-40 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-sm border-b border-black/5">
+            <div className="max-w-5xl mx-auto px-6 prose-base">
                 <div className="flex justify-between items-center h-16">
                     <Link href="/" className="fill-primary hover:fill-primary-dark hover:text-primary-dark text-2xl font-bold text-primary flex">
                         <Logo className="size-9 mr-2" />
                         Константин Потапов
                     </Link>
-                    <div className="hidden md:flex space-x-4">
+                    <div className="hidden md:flex space-x-2">
                         {menuItems.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`px-3 py-2 rounded-md text-sm font-medium ${
+                                className={`px-3 py-2 rounded-full text-sm font-medium transition-colors-200 ${
                                     pathname === item.href
                                         ? "bg-primary bg-texture text-white"
                                         : "text-secondary hover:bg-gray-100"
