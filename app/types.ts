@@ -8,8 +8,13 @@ export interface Project {
   repo?: string;
 }
 
-export interface RouteContext {
-  params: {
-    id: string;
-  };
+export interface TimelineItem {
+  id: string;
+  year: number;
+  title: string;
+  description: string;
+  link?: string;
+  lessons?: string;
+  isBlink?: boolean;
+  isStartup?: boolean;
 }

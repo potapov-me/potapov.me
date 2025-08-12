@@ -1,5 +1,7 @@
+'use client';
+
 import Image from "next/image";
-import {TimelineItem, TimelineItemProps} from "./components/TimelineItem";
+import {TimelineItemComponent} from "./components/TimelineItem";
 import {
     FaDocker,
     FaGitAlt,
@@ -19,7 +21,9 @@ import {
     SiTypescript,
     SiWagtail
 } from "react-icons/si";
-import {SkillCategory, Skills} from "./components/Skills";
+import { SkillCategory, Skills } from "./components/Skills";
+import { useState, useEffect } from 'react';
+import {TimelineItem, TimelineItem as TimelineItemType} from './types';
 
 
 export default function Home() {
@@ -35,100 +39,67 @@ export default function Home() {
         {
             category: "Backend",
             items: [
-                {name: "Python", icon: FaPython},
-                {name: "Django", icon: SiDjango},
-                {name: "FastAPI", icon: SiFastapi},
-                {name: "Go", icon: SiGo},
-                {name: "Wagtail", icon: SiWagtail},
-                {name: "NextJS", icon: SiNextdotjs},
+                { name: "Python", icon: FaPython },
+                { name: "Django", icon: SiDjango },
+                { name: "FastAPI", icon: SiFastapi },
+                { name: "Go", icon: SiGo },
+                { name: "Wagtail", icon: SiWagtail },
+                { name: "NextJS", icon: SiNextdotjs },
             ]
         },
         {
             category: "Frontend",
             items: [
-                {name: "React", icon: FaReact, hideName: true},
-                {name: "VueJS", icon: FaVuejs, hideName: true},
-                {name: "JS", icon: SiJavascript, hideName: true},
-                {name: "TypeScript", icon: SiTypescript, hideName: true},
-                {name: "Tailwind", icon: SiTailwindcss},
+                { name: "React", icon: FaReact, hideName: true },
+                { name: "VueJS", icon: FaVuejs, hideName: true },
+                { name: "JS", icon: SiJavascript, hideName: true },
+                { name: "TypeScript", icon: SiTypescript, hideName: true },
+                { name: "Tailwind", icon: SiTailwindcss },
             ]
         },
         {
             category: "DevOps & Databases",
             items: [
-                {name: "Docker", icon: FaDocker},
-                {name: "Linux", icon: FaLinux},
-                {name: "Git", icon: FaGitAlt},
-                {name: "MySQL", icon: SiMysql},
+                { name: "Docker", icon: FaDocker },
+                { name: "Linux", icon: FaLinux },
+                { name: "Git", icon: FaGitAlt },
+                { name: "MySQL", icon: SiMysql },
                 // {name: "Postgres", icon: SiPostgresql},
-                {name: "MongoDb", icon: SiMongodb},
-                {name: "RabbitMQ", icon: SiRabbitmq},
+                { name: "MongoDb", icon: SiMongodb },
+                { name: "RabbitMQ", icon: SiRabbitmq },
             ]
         },
         {
             category: "Other",
             items: [
-                {name: "FSD"},
-                {name: "Agile"},
-                {name: "Scrum"},
-                {name: "Kanban"},
+                { name: "FSD" },
+                { name: "Agile" },
+                { name: "Scrum" },
+                { name: "Kanban" },
             ]
         }
     ];
 
-    const timelineData: TimelineItemProps[] = [
-        {
-            year: 2005,
-            title: "ATCS",
-            description: "Система проверки задач для турниров по спортивному программированию. Первый опыт в разработке программного обеспечения."
-        },
-        {
-            year: 2006,
-            title: "Psy-Sound",
-            isStartup: true,
-            description: "Попробовал себя в shareware разработке. Создал редактор бинауральной музыки для медитации и внедрения собственных установок."
-        },
-        {
-            year: 2007,
-            title: "U-Infinity",
-            isStartup: true,
-            description: "Мультиплатформенный P2P видеохостинг где пользователи могли обмениваться видеофайлами. Вдохновленный торрентом, но с возможностью смотреть видео в реальном времени. Проект был закрыт, но это был мой первый опыт в разработке сложного программного обеспечения."
-        },
-        {
-            year: 2008,
-            title: "MultiGaminator",
-            description: "Как фрилансер разработал сначала сервер управления для казино и зала игровых автоматов, а затем и сами игровые автоматы. Первые большие для студента деньги, но и первые серьезные ошибки. Каждая из 38 известных мне интеграций была продана от 1,2м рублей, не считая доп модулей, но я как разработчик получил крохи. Справедливости ради, для казино бизнеса нужен не только софт, но и связи в криминале. Это было очень вдохновляющее время, когда я впервые увидел, что могу создавать что-то действительно работающее, что готовы покупать."
-        },
-        {
-            year: 2009,
-            title: "planeta-ekb.ru",
-            description: "Первый веб проект - каталог организаций. Что удивительно существует до сих пор. С него началась моя история освоения django и мира веба."
-        },
-        {
-            year: 2017,
-            title: "Идея сервис",
-            description: ""
-        },
-        {
-            year: 2020,
-            title: "Цифровой тьютор",
-            isStartup: true,
-            description: ""
-        },
-        {
-            year: 2025,
-            title: "Battleship",
-            isStartup: true,
-            description: "Осваиваю nest js на боевом проекте. Проект OpenSource, исходники можно посмотреть на моем GitHub."
-        },
-        {
-            year: new Date().getFullYear(),
-            title: "Текущий этап: трансформация",
-            description: "Интегрирую техническую экспертизу с новоприобретенными бизнес-навыками. Ищу модели, где могу создавать продукты, сочетающие технологическую инновационность и устойчивую бизнес-составляющую.",
-            lessons: "Извлеченные уроки: Техническое совершенство ≠ бизнес-успех. Сейчас фокусируюсь на целостном подходе к созданию ценности.",
-            isBlink: true
-        }
-    ];
+    const [timelineData, setTimelineData] = useState<TimelineItem[]>([]);
+
+    useEffect(() => {
+        const fetchTimeline = async () => {
+            const res = await fetch('/api/timeline');
+            if (res.ok) {
+                const data: TimelineItemType[] = await res.json();
+                const formattedData = data.map((item: TimelineItemType) => ({
+                    ...item,
+                    year: item.year,
+                }));
+                // Sort by year
+                formattedData.sort((a, b) => a.year - b.year);
+                setTimelineData(formattedData);
+            } else {
+                console.error('Failed to fetch timeline data');
+            }
+        };
+        fetchTimeline();
+    }, []);
 
     return (
         <>
@@ -162,17 +133,17 @@ export default function Home() {
                                 <li className="flex items-center">
                                     <span className="font-bold mr-2">Email:</span>
                                     <a href="mailto:constantin@potapov.me"
-                                    className="text-primary hover:underline">constantin@potapov.me</a>
+                                        className="text-primary hover:underline">constantin@potapov.me</a>
                                 </li>
                                 <li className="flex items-center">
                                     <span className="font-bold mr-2">Telegram:</span>
                                     <a href="https://t.me/potapov_me" target="_blank" rel="noopener noreferrer"
-                                    className="text-primary hover:underline">@potapov_me</a>
+                                        className="text-primary hover:underline">@potapov_me</a>
                                 </li>
                                 <li className="flex items-center">
                                     <span className="font-bold mr-2">GitHub:</span>
                                     <a href="https://github.com/potapov-me" target="_blank" rel="noopener noreferrer"
-                                    className="text-primary hover:underline">potapov-me</a>
+                                        className="text-primary hover:underline">potapov-me</a>
                                 </li>
                                 <li className="flex items-center">
                                     <span className="font-bold mr-2">Телефон:</span>
@@ -180,7 +151,7 @@ export default function Home() {
                                 </li>
                             </ul>
                         </section>
-                        <Skills skills={skills}/>
+                        <Skills skills={skills} />
                         <section className="mb-8 bg-gray-100 p-6">
                             <h3 className="text-xl font-bold mb-4">Достижения</h3>
                             <ul className="space-y-3">
@@ -223,8 +194,9 @@ export default function Home() {
                             <h2 className="text-3xl font-bold mb-6 text-center">Профессиональная эволюция</h2>
                             <div className="space-y-10">
                                 {timelineData.map((item, index) => (
-                                    <TimelineItem
+                                    <TimelineItemComponent
                                         key={index}
+                                        id={item.id}
                                         year={item.year}
                                         title={item.title}
                                         description={item.description}

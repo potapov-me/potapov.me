@@ -138,10 +138,10 @@ export default function ProjectsPage() {
                                     <td className="py-2 px-4">{project.description}</td>
                                     <td className="py-2 px-4 flex">
                                         <button onClick={() => { setEditingProject(project); setIsModalOpen(true); }} className="text-secondary hover:text-white hover:bg-secondary mr-4 p-4 flex items-center">
-                                            <FiEdit className="mr-1"/>
+                                            <FiEdit />
                                         </button>
                                         <button onClick={() => handleDelete(project.id)} className="text-primary hover:text-white hover:bg-primary p-4 flex items-center">
-                                            <FiTrash2 className="mr-1"/>
+                                            <FiTrash2 />
                                         </button>
                                     </td>
                                 </tr>

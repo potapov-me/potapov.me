@@ -42,6 +42,8 @@ const MainMenu = () => {
                     </div>
                     <div className="md:hidden flex items-center">
                         <button
+                            type="button"
+                            title='Открыть меню'
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className="text-secondary focus:outline-none"
                         >
