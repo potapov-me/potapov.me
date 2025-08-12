@@ -19,3 +19,7 @@ export async function POST() {
 
     return response;
 }
+
+export async function GET() {
+    return NextResponse.json({ message: "Use POST to logout" }, { status: 200 });
+}

@@ -2,16 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/db";
 import { z } from "zod";
 
-const projectSchema = z.object({
-  name: z.string().min(1),
+// Validation schema
+const timelineItemSchema = z.object({
+  year: z.number().int().positive(),
+  title: z.string().min(1),
   description: z.string(),
-  url: z.preprocess(
-    (val) => (val === "" || val === null ? undefined : val),
-    z.string().url().optional()
-  ),
-  icon: z.string(),
-  stack: z.array(z.string()),
-  repo: z.preprocess(
+  lessons: z.string().optional(),
+  isBlink: z.boolean().optional(),
+  isStartup: z.boolean().optional(),
+  link: z.preprocess(
     (val) => (val === "" || val === null ? undefined : val),
     z.string().url().optional()
   ),
@@ -22,22 +21,23 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const project = await prisma.project.findUnique({
-      where: { id: (await params).id },
+    const resolvedParams = await params;
+    const timelineItem = await prisma.timelineItem.findUnique({
+      where: { id: resolvedParams.id },
     });
 
-    if (!project) {
+    if (!timelineItem) {
       return NextResponse.json(
-        { message: "Project not found" },
+        { message: "Timeline item not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(project);
+    return NextResponse.json(timelineItem);
   } catch (error) {
-    console.error("Error fetching project:", error);
+    console.error("Error fetching timeline item:", error);
     return NextResponse.json(
-      { message: "Error fetching project" },
+      { message: "Error fetching timeline item" },
       { status: 500 }
     );
   }
@@ -49,11 +49,10 @@ export async function PUT(
 ) {
   try {
     const resolvedParams = await params;
-
     const data = await req.json();
 
-    const validationResult = projectSchema.safeParse(data);
-
+    // Validate input data
+    const validationResult = timelineItemSchema.safeParse(data);
     if (!validationResult.success) {
       return NextResponse.json(
         { message: "Invalid data", errors: validationResult.error.format() },
@@ -61,32 +60,29 @@ export async function PUT(
       );
     }
 
-    const existingProject = await prisma.project.findUnique({
+    // Check if item exists
+    const existingItem = await prisma.timelineItem.findUnique({
       where: { id: resolvedParams.id },
     });
 
-    if (!existingProject) {
+    if (!existingItem) {
       return NextResponse.json(
-        { message: "Project not found" },
+        { message: "Timeline item not found" },
         { status: 404 }
       );
     }
 
-    const { stack, ...rest } = validationResult.data;
-
-    const updatedProject = await prisma.project.update({
+    // Update the item
+    const updatedItem = await prisma.timelineItem.update({
       where: { id: resolvedParams.id },
-      data: {
-        ...rest,
-        stack: stack.join(","),
-      },
+      data: validationResult.data,
     });
 
-    return NextResponse.json(updatedProject);
+    return NextResponse.json(updatedItem);
   } catch (error) {
-    console.error("Error updating project:", error);
+    console.error("Error updating timeline item:", error);
     return NextResponse.json(
-      { message: "Error updating project" },
+      { message: "Error updating timeline item" },
       { status: 500 }
     );
   }
@@ -98,29 +94,32 @@ export async function DELETE(
 ) {
   try {
     const resolvedParams = await params;
-    const existingProject = await prisma.project.findUnique({
+
+    // Check if item exists
+    const existingItem = await prisma.timelineItem.findUnique({
       where: { id: resolvedParams.id },
     });
 
-    if (!existingProject) {
+    if (!existingItem) {
       return NextResponse.json(
-        { message: "Project not found" },
+        { message: "Timeline item not found" },
         { status: 404 }
       );
     }
 
-    await prisma.project.delete({
+    // Delete the item
+    await prisma.timelineItem.delete({
       where: { id: resolvedParams.id },
     });
 
     return NextResponse.json(
-      { message: "Project deleted successfully" },
+      { message: "Timeline item deleted successfully" },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error deleting project:", error);
+    console.error("Error deleting timeline item:", error);
     return NextResponse.json(
-      { message: "Error deleting project" },
+      { message: "Error deleting timeline item" },
       { status: 500 }
     );
   }

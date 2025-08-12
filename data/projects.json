@@ -3,12 +3,7 @@
     "id": 1,
     "name": "Персональный сайт",
     "description": "Этот самый сайт, на котором вы находитесь. Сделан на Next.js и Tailwind CSS.",
-    "stack": [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Tailwind CSS"
-    ],
+    "stack": "Next.js,React,TypeScript,Tailwind CSS",
     "repo": "https://github.com/potapov-me/potapov.me",
     "url": "http://potapov.me"
   }

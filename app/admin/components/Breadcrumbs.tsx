@@ -6,6 +6,7 @@ import {usePathname} from "next/navigation";
 const breadcrumbNameMap: { [key: string]: string } = {
     "/admin": "Админка",
     "/admin/projects": "Проекты",
+    "/admin/timeline": "Таймлайн",
 };
 
 const Breadcrumbs = () => {

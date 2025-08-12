@@ -1,8 +1,11 @@
 "use client";
 
+import Logo from "@/public/logo.svg";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useState} from "react";
+import { FaUser } from 'react-icons/fa';
+
 
 const MainMenu = () => {
     const pathname = usePathname();
@@ -12,33 +15,37 @@ const MainMenu = () => {
         {href: "/", label: "Обо мне"},
         {href: "/projects", label: "Проекты"},
         {href: "/contact", label: "Контакты"},
-        {href: "/admin", label: "Админка"},
+        {href: "/admin", label: "Админка", isAdmin: true, icon: FaUser},
     ];
 
     return (
-        <nav className="bg-gray-100 bg-texture shadow-md">
-            <div className="max-w-5xl mx-auto px-6">
+        <nav className="sticky top-0 z-40 glass shadow-sm">
+            <div className="max-w-5xl mx-auto px-6 prose-base">
                 <div className="flex justify-between items-center h-16">
-                    <Link href="/" className="text-2xl font-bold text-primary">
+                    <Link href="/" className="fill-primary hover:fill-primary-dark hover:text-primary-dark text-2xl font-bold text-primary flex">
+                        <Logo className="size-9 mr-2" />
                         Константин Потапов
                     </Link>
-                    <div className="hidden md:flex space-x-4">
+                    <div className="hidden md:flex space-x-1.5">
                         {menuItems.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`px-3 py-2 rounded-md text-sm font-medium ${
+                                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors-200 ${
                                     pathname === item.href
                                         ? "bg-primary bg-texture text-white"
                                         : "text-secondary hover:bg-gray-100"
                                 }`}
                             >
-                                {item.label}
+                                {item.icon && <item.icon className="text-xl"/>}
+                                { !item.isAdmin && item.label}
                             </Link>
                         ))}
                     </div>
                     <div className="md:hidden flex items-center">
                         <button
+                            type="button"
+                            title='Открыть меню'
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className="text-secondary focus:outline-none"
                         >
