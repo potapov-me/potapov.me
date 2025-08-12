@@ -100,7 +100,7 @@ export default function ProjectsPage() {
                     title: "Успех",
                     description: "Проект успешно удален",
                 });
-            } catch (error) {
+            } catch {
                 toast({
                     title: "Ошибка",
                     description: "Не удалось удалить проект",
@@ -146,7 +146,7 @@ export default function ProjectsPage() {
             }
             setIsModalOpen(false);
             setEditingProject(null);
-        } catch (error) {
+        } catch {
             toast({
                 title: "Ошибка",
                 description: "Не удалось сохранить проект",

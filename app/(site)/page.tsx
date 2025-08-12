@@ -27,7 +27,7 @@ import { useTimeline } from "../contexts/TimelineContext";
 import { getProjectWordForm } from "@/app/lib/utils";
 
 export default function Home() {
-    const { timelineItems: timelineData, isLoading } = useTimeline();
+    const { timelineItems: timelineData } = useTimeline();
     
     const philosophy = [
         "аналитическое мышление",

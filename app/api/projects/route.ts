@@ -18,7 +18,7 @@ const projectSchema = z.object({
   ),
 });
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const projects = await prisma.project.findMany();
     return NextResponse.json(projects);
