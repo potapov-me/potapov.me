@@ -2,6 +2,7 @@ import MainMenu from "../components/MainMenu";
 import dynamic from "next/dynamic";
 import {FaTelegramPlane, FaGithub, FaEnvelope} from "react-icons/fa";
 import {SiHabr, SiVk} from "react-icons/si";
+import FooterConnectionsClient from "./_components/FooterConnectionsClient";
 
 export default function RootLayout({
                                        children,
@@ -42,6 +43,7 @@ export default function RootLayout({
                             ИП Потапов К.С. ОГРНИП 312668617300033 <br/>
                             © {new Date().getFullYear()} Все права защищены.
                         </div>
+                        <FooterConnectionsClient />
                     </div>
                 </footer>
             </div>
