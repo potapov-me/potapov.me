@@ -29,3 +29,7 @@ button,
 a {
   @apply cursor-pointer;
 }
+
+.logo {
+  fill: var(--color-primary);
+}

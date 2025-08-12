@@ -1,7 +1,12 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import {FiEdit, FiPlus, FiSave, FiTrash2, FiX} from "react-icons/fi";
+import {FiEdit, FiPlus, FiTrash2} from "react-icons/fi";
+import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
+import { Textarea } from "@/app/components/ui/textarea";
+import { Label } from "@/app/components/ui/label";
+import { useToast } from "@/app/hooks/use-toast";
 
 interface Project {
     id: string;
@@ -15,99 +20,53 @@ interface Project {
 
 const ProjectForm = ({project, onSave, onCancel}: { project: Partial<Project> | null, onSave: (project: Partial<Project>) => void, onCancel: () => void }) => {
     const [formData, setFormData] = useState<Partial<Project>>(project || {name: '', description: '', stack: '', icon: ''});
-    const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
     useEffect(() => {
         setFormData(project || {name: '', description: '', stack: '', icon: ''});
-        setErrors({}); // Clear errors on project change
     }, [project]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const {name, value} = e.target;
         setFormData({...formData, [name]: value});
-        setErrors(prev => ({ ...prev, [name]: '' })); // Clear error when user types
-    };
-    
-    const handleStackChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({...formData, stack: e.target.value});
-        setErrors(prev => ({ ...prev, stack: '' })); // Clear error when user types
-    }
-
-    const validateForm = () => {
-        const newErrors: { [key: string]: string } = {};
-        if (!formData.name || formData.name.trim() === '') {
-            newErrors.name = 'Название обязательно.';
-        }
-        if (!formData.description || formData.description.trim() === '') {
-            newErrors.description = 'Описание обязательно.';
-        }
-        if (!formData.stack || formData.stack.trim() === '') {
-            newErrors.stack = 'Стек обязателен.';
-        }
-        if (!formData.icon || formData.icon.trim() === '') {
-            newErrors.icon = 'Иконка обязательна.';
-        }
-        if (formData.url && !/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(formData.url)) {
-            newErrors.url = 'Введите корректный URL.';
-        }
-        if (formData.repo && !/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(formData.repo)) {
-            newErrors.repo = 'Введите корректный URL.';
-        }
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (validateForm()) {
-            onSave(formData);
-        }
+        onSave(formData);
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-8 rounded-lg w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-4">{project?.id ? "Редактировать проект" : "Добавить проект"}</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Название</label>
-                        <input type="text" name="name" id="name" value={formData.name || ""} onChange={handleChange} className={`mt-1 block w-full px-3 py-2 border ${errors.name ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm`} required />
-                        {errors.name && <p className="text-error text-sm mt-1">{errors.name}</p>}
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-8 rounded-lg w-full max-w-md shadow-xl">
+                <h2 className="text-2xl font-bold mb-6">{project?.id ? "Редактировать проект" : "Добавить проект"}</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <Label htmlFor="name">Название</Label>
+                        <Input type="text" name="name" id="name" value={formData.name || ""} onChange={handleChange} required />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Описание</label>
-                        <textarea name="description" id="description" value={formData.description || ""} onChange={handleChange} className={`mt-1 block w-full px-3 py-2 border ${errors.description ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm`} required />
-                        {errors.description && <p className="text-error text-sm mt-1">{errors.description}</p>}
+                    <div>
+                        <Label htmlFor="description">Описание</Label>
+                        <Textarea name="description" id="description" value={formData.description || ""} onChange={handleChange} required />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="stack" className="block text-sm font-medium text-gray-700">Стек (через запятую)</label>
-                        <input type="text" name="stack" id="stack" value={formData.stack || ""} onChange={handleStackChange} className={`mt-1 block w-full px-3 py-2 border ${errors.stack ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm`} required />
-                        {errors.stack && <p className="text-error text-sm mt-1">{errors.stack}</p>}
+                    <div>
+                        <Label htmlFor="stack">Стек (через запятую)</Label>
+                        <Input type="text" name="stack" id="stack" value={formData.stack || ""} onChange={handleChange} required />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="icon" className="block text-sm font-medium text-gray-700">Иконка</label>
-                        <input type="text" name="icon" id="icon" value={formData.icon || ""} onChange={handleChange} className={`mt-1 block w-full px-3 py-2 border ${errors.icon ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm`} required />
-                        {errors.icon && <p className="text-error text-sm mt-1">{errors.icon}</p>}
+                    <div>
+                        <Label htmlFor="icon">Иконка</Label>
+                        <Input type="text" name="icon" id="icon" value={formData.icon || ""} onChange={handleChange} required />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="url" className="block text-sm font-medium text-gray-700">URL</label>
-                        <input type="text" name="url" id="url" value={formData.url || ""} onChange={handleChange} className={`mt-1 block w-full px-3 py-2 border ${errors.url ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm`} />
-                        {errors.url && <p className="text-error text-sm mt-1">{errors.url}</p>}
+                    <div>
+                        <Label htmlFor="url">URL</Label>
+                        <Input type="text" name="url" id="url" value={formData.url || ""} onChange={handleChange} />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="repo" className="block text-sm font-medium text-gray-700">Репозиторий</label>
-                        <input type="text" name="repo" id="repo" value={formData.repo || ""} onChange={handleChange} className={`mt-1 block w-full px-3 py-2 border ${errors.repo ? 'border-error' : 'border-gray-300'} rounded-md shadow-sm`} />
-                        {errors.repo && <p className="text-error text-sm mt-1">{errors.repo}</p>}
+                    <div>
+                        <Label htmlFor="repo">Репозиторий</Label>
+                        <Input type="text" name="repo" id="repo" value={formData.repo || ""} onChange={handleChange} />
                     </div>
-                    <div className="flex justify-end">
-                        <button type="button" onClick={onCancel} className="mr-4 px-4 py-2 rounded-md hover:bg-gray-100 flex items-center">
-                            <FiX className="mr-2"/>
-                            Отмена
-                        </button>
-                        <button type="submit" className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark flex items-center">
-                            <FiSave className="mr-2"/>
-                            Сохранить
-                        </button>
+                    <div className="flex justify-end space-x-4 pt-4">
+                        <Button type="button" variant="outline" onClick={onCancel}>Отмена</Button>
+                        <Button type="submit">Сохранить</Button>
                     </div>
                 </form>
             </div>
@@ -117,21 +76,37 @@ const ProjectForm = ({project, onSave, onCancel}: { project: Partial<Project> | 
 
 export default function ProjectsPage() {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProject, setEditingProject] = useState<Partial<Project> | null>(null);
+    const { toast } = useToast();
 
     useEffect(() => {
+        setIsLoading(true);
         fetch("/api/projects")
             .then((res) => res.json())
-            .then(setProjects);
+            .then(setProjects)
+            .finally(() => setIsLoading(false));
     }, []);
 
     const handleDelete = async (id: string) => {
         if (window.confirm("Вы уверены, что хотите удалить этот проект?")) {
-            await fetch(`/api/projects/${id}`, {
-                method: "DELETE",
-            });
-            setProjects(projects.filter((p) => p.id !== id));
+            try {
+                await fetch(`/api/projects/${id}`, {
+                    method: "DELETE",
+                });
+                setProjects(projects.filter((p) => p.id !== id));
+                toast({
+                    title: "Успех",
+                    description: "Проект успешно удален",
+                });
+            } catch (error) {
+                toast({
+                    title: "Ошибка",
+                    description: "Не удалось удалить проект",
+                    variant: "destructive",
+                });
+            }
         }
     };
 
@@ -141,64 +116,89 @@ export default function ProjectsPage() {
             stack: (project.stack || '').split(',').map(s => s.trim()),
         };
 
-        if (project.id) {
-            // Edit
-            const response = await fetch(`/api/projects/${project.id}`, {
-                method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(projectData),
+        try {
+            if (project.id) {
+                // Edit
+                const response = await fetch(`/api/projects/${project.id}`, {
+                    method: "PUT",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(projectData),
+                });
+                const updatedProject = await response.json();
+                setProjects(projects.map(p => p.id === updatedProject.id ? updatedProject : p));
+                toast({
+                    title: "Успех",
+                    description: "Проект успешно обновлен",
+                });
+            } else {
+                // Add
+                const response = await fetch("/api/projects", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(projectData),
+                });
+                const newProject = await response.json();
+                setProjects([...projects, newProject]);
+                toast({
+                    title: "Успех",
+                    description: "Проект успешно добавлен",
+                });
+            }
+            setIsModalOpen(false);
+            setEditingProject(null);
+        } catch (error) {
+            toast({
+                title: "Ошибка",
+                description: "Не удалось сохранить проект",
+                variant: "destructive",
             });
-            const updatedProject = await response.json();
-            setProjects(projects.map(p => p.id === updatedProject.id ? updatedProject : p));
-        } else {
-            // Add
-            const response = await fetch("/api/projects", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(projectData),
-            });
-            const newProject = await response.json();
-            setProjects([...projects, newProject]);
         }
-        setIsModalOpen(false);
-        setEditingProject(null);
     };
 
     return (
         <div>
-            <h1 className="text-4xl font-bold text-center">Админка проектов</h1>
-            <div className="mt-8">
-                <button onClick={() => { setEditingProject({}); setIsModalOpen(true); }} className="bg-primary text-white px-4 py-2 rounded-md mb-4 hover:bg-secondary flex items-center">
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-3xl font-bold">Управление проектами</h1>
+                <Button onClick={() => { setEditingProject({}); setIsModalOpen(true); }}>
                     <FiPlus className="mr-2"/>
                     Добавить проект
-                </button>
-                <div className="overflow-x-auto mb-8">
-                    <table className="min-w-full bg-white">
-                        <thead>
+                </Button>
+            </div>
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
                             <tr>
-                                <th className="py-2 px-4 border-b">Название</th>
-                                <th className="py-2 px-4 border-b">Описание</th>
-                                <th className="py-2 px-4 border-b">Действия</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Название</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Описание</th>
+                                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Действия</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {projects.map((project) => (
-                                <tr key={project.id}>
-                                    <td className="py-2 px-4">{project.name}</td>
-                                    <td className="py-2 px-4">{project.description}</td>
-                                    <td className="py-2 px-4 flex">
-                                        <button key={`${project.id}-edit`} type="button" title="Edit project" onClick={() => {
-                                            setEditingProject(project);
-                                            setIsModalOpen(true);
-                                            }} className="text-secondary hover:text-white hover:bg-secondary mr-4 p-4 flex items-center">
-                                            <FiEdit />
-                                        </button>
-                                        <button key={`${project.id}-delete`} type="button" title="Delete project" onClick={() => handleDelete(project.id)} className="text-primary hover:text-white hover:bg-primary p-4 flex items-center">
-                                            <FiTrash2 />
-                                        </button>
-                                    </td>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {isLoading ? (
+                                <tr>
+                                    <td colSpan={3} className="px-6 py-4 text-center">Загрузка...</td>
                                 </tr>
-                            ))}
+                            ) : projects.length === 0 ? (
+                                <tr>
+                                    <td colSpan={3} className="px-6 py-4 text-center">Проектов не найдено.</td>
+                                </tr>
+                            ) : (
+                                projects.map((project) => (
+                                    <tr key={project.id}>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{project.name}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-500 max-w-md truncate">{project.description}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <Button variant="outline" size="sm" className="mr-2" onClick={() => { setEditingProject(project); setIsModalOpen(true); }}>
+                                                <FiEdit className="mr-1" /> Редактировать
+                                            </Button>
+                                            <Button variant="destructive" size="sm" onClick={() => handleDelete(project.id)}>
+                                                <FiTrash2 className="mr-1" /> Удалить
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
                         </tbody>
                     </table>
                 </div>

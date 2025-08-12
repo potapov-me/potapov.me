@@ -1,5 +1,6 @@
 "use client";
 
+import Logo from "@/public/logo.svg";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useState} from "react";
@@ -21,7 +22,8 @@ const MainMenu = () => {
         <nav className="bg-gray-100 bg-texture shadow-md">
             <div className="max-w-5xl mx-auto px-6">
                 <div className="flex justify-between items-center h-16">
-                    <Link href="/" className="text-2xl font-bold text-primary">
+                    <Link href="/" className="fill-primary hover:fill-primary-dark hover:text-primary-dark text-2xl font-bold text-primary flex">
+                        <Logo className="size-9 mr-2" />
                         Константин Потапов
                     </Link>
                     <div className="hidden md:flex space-x-4">

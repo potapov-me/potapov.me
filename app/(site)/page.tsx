@@ -1,7 +1,8 @@
 'use client';
 
+import Logo from '../../public/logo.svg';
 import Image from "next/image";
-import {TimelineItemComponent} from "./components/TimelineItem";
+import {TimelineItemComponent} from "../components/TimelineItem";
 import {
     FaDocker,
     FaGitAlt,
@@ -21,8 +22,9 @@ import {
     SiTypescript,
     SiWagtail
 } from "react-icons/si";
-import { SkillCategory, Skills } from "./components/Skills";
-import { useTimeline } from "./contexts/TimelineContext";
+import { SkillCategory, Skills } from "../components/Skills";
+import { useTimeline } from "../contexts/TimelineContext";
+import { getProjectWordForm } from "@/app/lib/utils";
 
 export default function Home() {
     const { timelineItems: timelineData, isLoading } = useTimeline();
@@ -84,7 +86,8 @@ export default function Home() {
         <>
             <header className="py-16 px-6">
                 <div className="max-w-5xl mx-auto text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary flex items-center justify-center">
+                        <Logo className="size-14 mr-2 fill-primary" />
                         Константин Потапов
                     </h1>
                     <p className="text-xl text-secondary mb-6">
@@ -145,7 +148,7 @@ export default function Home() {
                                 </li>
                                 <li className="flex items-center">
                                     <span className="text-2xl mr-3">🚀</span>
-                                    <span>Реализовал {timelineData.filter(item => item.isStartup).length} стартап‑проектов</span>
+                                    <span>Реализовал {timelineData.filter(item => item.isStartup).length} {getProjectWordForm(timelineData.filter(item => item.isStartup).length)}</span>
                                 </li>
                             </ul>
                         </section>
@@ -192,9 +195,9 @@ export default function Home() {
                 {/* Философия */}
                 <section className=" bg-secondary p-8 text-white">
                     <h2 className="text-2xl font-bold mb-4">Моя философия развития</h2>
-                    <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                    <ul className="list-disc pl-5 space-y-2 text-white">
                         {philosophy.map((item, index) => (
-                            <li key={index} className="transition-colors hover:text-blue-600">{item}</li>
+                            <li key={index} className="transition-colors hover:text-primary-light">{item}</li>
                         ))}
                     </ul>
                     <p className="mt-4 font-light italic">

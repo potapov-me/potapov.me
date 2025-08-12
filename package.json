@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev --turbopack",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start -p 10001",
     "lint": "next lint"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -39,6 +43,8 @@
     "eslint-config-next": "15.4.5",
     "prisma": "^6.13.0",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }
