@@ -18,7 +18,7 @@ const MainMenu = () => {
     ];
 
     return (
-        <nav className="sticky top-0 z-40 bg-white/85 shadow-sm">
+        <nav className="sticky top-0 z-40 glass shadow-sm">
             <div className="max-w-5xl mx-auto px-6 prose-base">
                 <div className="flex justify-between items-center h-16">
                     <Link prefetch={false} href="/" className="fill-primary hover:fill-primary-dark hover:text-primary-dark text-2xl font-bold text-primary flex">
