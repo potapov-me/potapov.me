@@ -25,6 +25,9 @@ import { SkillCategory, Skills } from "../components/Skills";
 import { useTimeline } from "../contexts/TimelineContext";
 import { getProjectWordForm } from "@/app/lib/utils";
 import { FsdIcon } from "../components/icons/FsdIcon";
+import { AgileIcon } from "../components/icons/AgileIcon";
+import { KanbanIcon } from "../components/icons/KanbanIcon";
+import { ScrumIcon } from "../components/icons/ScrumIcon";
 
 export default function Home() {
     const { timelineItems: timelineData } = useTimeline();
@@ -76,9 +79,9 @@ export default function Home() {
             category: "Other",
             items: [
                 { name: "FSD", icon: FsdIcon },
-                { name: "Agile" },
-                { name: "Scrum" },
-                { name: "Kanban" },
+                { name: "Agile", icon: AgileIcon },
+                { name: "Scrum", icon: ScrumIcon },
+                { name: "Kanban", icon: KanbanIcon },
             ]
         }
     ];
