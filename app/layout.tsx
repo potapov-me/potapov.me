@@ -64,8 +64,19 @@ export const metadata: Metadata = {
     },
 };
 
-const manrope = Manrope({ subsets: ["cyrillic", "latin"], variable: "--font-sans" });
-const playfair = IBM_Plex_Serif({ subsets: ["cyrillic", "latin"], weight: ["400", "600", "700"], variable: "--font-heading" });
+const manrope = Manrope({
+    subsets: ["cyrillic", "latin"],
+    display: "swap",
+    variable: "--font-sans",
+    preload: true,
+});
+const playfair = IBM_Plex_Serif({
+    subsets: ["cyrillic", "latin"],
+    weight: ["400", "600", "700"],
+    display: "swap",
+    variable: "--font-heading",
+    preload: true,
+});
 
 export default function RootLayout({
                                        children,
@@ -73,7 +84,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="ru" className={`${manrope.variable} ${playfair.variable}`}>
+        <html lang="ru" className={`${manrope.variable} ${playfair.variable}`} suppressHydrationWarning>
         <body
             className={`antialiased`}
         >

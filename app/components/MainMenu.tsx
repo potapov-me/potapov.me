@@ -22,13 +22,13 @@ const MainMenu = () => {
         <nav className="sticky top-0 z-40 glass shadow-sm">
             <div className="max-w-5xl mx-auto px-6 prose-base">
                 <div className="flex justify-between items-center h-16">
-                    <Link href="/" className="fill-primary hover:fill-primary-dark hover:text-primary-dark text-2xl font-bold text-primary flex">
+                    <Link prefetch={false} href="/" className="fill-primary hover:fill-primary-dark hover:text-primary-dark text-2xl font-bold text-primary flex">
                         <Logo className="size-9 mr-2" />
                         Константин Потапов
                     </Link>
                     <div className="hidden md:flex space-x-1.5">
                         {menuItems.map((item) => (
-                            <Link
+                            <Link prefetch={false}
                                 key={item.href}
                                 href={item.href}
                                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors-200 ${
@@ -80,7 +80,7 @@ const MainMenu = () => {
                 <div className="md:hidden">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         {menuItems.map((item) => (
-                            <Link
+                            <Link prefetch={false}
                                 key={item.href}
                                 href={item.href}
                                 className={`block px-3 py-2 rounded-md text-base font-medium ${

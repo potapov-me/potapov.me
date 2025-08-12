@@ -104,7 +104,7 @@ export default function Home() {
                 </div>
             </header>
             <main className="max-w-5xl mx-auto px-6 pb-16 prose-base">
-                <Script id="ld-org" type="application/ld+json"
+                <Script id="ld-org" type="application/ld+json" strategy="afterInteractive"
                         dangerouslySetInnerHTML={{ __html: JSON.stringify({
                             "@context": "https://schema.org",
                             "@type": "Person",
@@ -130,7 +130,9 @@ export default function Home() {
                             width={315}
                             height={742}
                             className="w-full h-auto rounded-lg ring-1 ring-black/5"
+                            sizes="(max-width: 768px) 100vw, 315px"
                             priority
+                            fetchPriority="high"
                         />
                         <section className="mt-6 glass p-5 rounded-lg shadow-sm">
                             <h3 className="text-xl font-heading mb-4">Контакты</h3>
