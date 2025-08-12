@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { TimelineItem } from "@/app/types";
-import { useToast } from "@/app/hooks/use-toast";
 
 interface TimelineContextType {
   timelineItems: TimelineItem[];
@@ -20,7 +19,6 @@ export const TimelineProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [timelineItems, setTimelineItems] = useState<TimelineItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const { toast } = useToast();
 
   const fetchTimeline = async () => {
     setIsLoading(true);
@@ -34,11 +32,6 @@ export const TimelineProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err : new Error(String(err)));
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to load timeline data",
-      });
     } finally {
       setIsLoading(false);
     }
@@ -60,17 +53,8 @@ export const TimelineProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
       const newItem = await response.json();
       setTimelineItems((prev) => [...prev, newItem]);
-      toast({
-        title: "Success",
-        description: "Timeline item added successfully",
-      });
     } catch (err) {
       setError(err instanceof Error ? err : new Error(String(err)));
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to add timeline item",
-      });
       throw err;
     }
   };
@@ -93,17 +77,8 @@ export const TimelineProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       setTimelineItems((prev) =>
         prev.map((i) => (i.id === id ? updatedItem : i))
       );
-      toast({
-        title: "Success",
-        description: "Timeline item updated successfully",
-      });
     } catch (err) {
       setError(err instanceof Error ? err : new Error(String(err)));
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to update timeline item",
-      });
       throw err;
     }
   };
@@ -119,17 +94,8 @@ export const TimelineProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       }
 
       setTimelineItems((prev) => prev.filter((i) => i.id !== id));
-      toast({
-        title: "Success",
-        description: "Timeline item deleted successfully",
-      });
     } catch (err) {
       setError(err instanceof Error ? err : new Error(String(err)));
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to delete timeline item",
-      });
       throw err;
     }
   };
