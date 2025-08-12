@@ -21,7 +21,7 @@ export const Skills = ({skills}: SkillsProps) => {
             <div className="space-y-4">
                 {skills.map((category, index) => (
                     <div key={index}>
-                        <h4 className="text-lg font-heading mb-2 text-primary">{category.category}</h4>
+                        <h3 className="text-lg font-heading mb-2 text-primary">{category.category}</h3>
                         <ul className="flex flex-wrap gap-2.5">
                             {category.items.map((skill, skillIndex) => (
                                 <li key={skillIndex} title={skill.name} className="flex items-center card-elevated py-1.5 px-2.5">
