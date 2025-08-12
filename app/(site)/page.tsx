@@ -1,6 +1,5 @@
 'use client';
 
-import Logo from '../../public/logo.svg';
 import Image from "next/image";
 import {TimelineItemComponent} from "../components/TimelineItem";
 import {
@@ -17,7 +16,7 @@ import {
     SiGo,
     SiJavascript, SiMongodb,
     SiMysql,
-    SiNextdotjs, SiRabbitmq,
+    SiNextdotjs, SiPrisma, SiRabbitmq,
     SiTailwindcss,
     SiTypescript,
     SiWagtail
@@ -25,6 +24,7 @@ import {
 import { SkillCategory, Skills } from "../components/Skills";
 import { useTimeline } from "../contexts/TimelineContext";
 import { getProjectWordForm } from "@/app/lib/utils";
+import { FsdIcon } from "../components/icons/FsdIcon";
 
 export default function Home() {
     const { timelineItems: timelineData } = useTimeline();
@@ -67,6 +67,7 @@ export default function Home() {
                 { name: "Git", icon: FaGitAlt },
                 { name: "MySQL", icon: SiMysql },
                 // {name: "Postgres", icon: SiPostgresql},
+                { name: "Prisma", icon: SiPrisma },
                 { name: "MongoDb", icon: SiMongodb },
                 { name: "RabbitMQ", icon: SiRabbitmq },
             ]
@@ -74,7 +75,7 @@ export default function Home() {
         {
             category: "Other",
             items: [
-                { name: "FSD" },
+                { name: "FSD", icon: FsdIcon },
                 { name: "Agile" },
                 { name: "Scrum" },
                 { name: "Kanban" },
@@ -87,14 +88,13 @@ export default function Home() {
             <header className="py-12 px-6">
                 <div className="max-w-5xl mx-auto text-center prose-base">
                     <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4 text-primary flex items-center justify-center">
-                        <Logo className="size-14 mr-3 fill-primary" />
                         Константин Потапов
                     </h1>
                     <p className="text-lg md:text-xl text-secondary/90 mb-4">
-                        Инженер · Предприниматель · Архитектор
+                        Инженер · Предприниматель · Software Architect
                     </p>
                     <div className="inline-flex items-center glass rounded-full px-4 py-1.5 text-sm shadow-sm">
-                        <span className="w-3 h-3 bg-white rounded-full mr-2 animate-pulse" />
+                        <span className="w-3 h-3 bg-primary rounded-full mr-2 animate-pulse" />
                         <span className="text-secondary">Инженерный подход к проектам</span>
                     </div>
                 </div>
