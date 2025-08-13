@@ -15,7 +15,7 @@ import {
     SiFastapi,
     SiGo,
     SiJavascript, SiMongodb,
-    SiMysql,
+    SiMysql, SiNestjs,
     SiNextdotjs, SiPrisma, SiRabbitmq,
     SiTailwindcss,
     SiTypescript,
@@ -43,6 +43,7 @@ export default function Home() {
             items: [
                 { name: "Python", icon: FaPython },
                 { name: "Django", icon: SiDjango },
+                { name: "NestJS", icon: SiNestjs },
                 { name: "FastAPI", icon: SiFastapi },
                 { name: "Go", icon: SiGo },
                 { name: "Wagtail", icon: SiWagtail },
