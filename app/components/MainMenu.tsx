@@ -13,6 +13,7 @@ const MainMenu = () => {
     const menuItems = [
         {href: "/", label: "Обо мне"},
         {href: "/projects", label: "Проекты"},
+        {href: "/blog", label: "Блог"},
         {href: "/contact", label: "Контакты"},
         {href: "/admin", label: "Админка", isAdmin: true},
     ];

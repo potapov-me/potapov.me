@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FaCalendarAlt, FaBriefcase, FaChartLine } from "react-icons/fa";
+import { FaCalendarAlt, FaBriefcase, FaChartLine, FaRss } from "react-icons/fa";
 import { FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import { ReactNode, useState } from "react";
 import { useToast } from "@/app/hooks/use-toast";
@@ -41,6 +41,11 @@ export function AdminShell({ children }: AdminShellProps) {
       name: "Проекты",
       href: "/admin/projects",
       icon: FaBriefcase,
+    },
+    {
+      name: "Блог",
+      href: "/admin/blog",
+      icon: FaRss,
     },
   ];
 

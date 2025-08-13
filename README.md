@@ -35,6 +35,42 @@
 2. Настройте `.env` с подключением к базе данных (Prisma).
 3. Запустите сервер: `npm run dev`.
 
+## Миграции БД (Prisma)
+
+Перед началом убедитесь, что в `.env` задан `DATABASE_URL` (например, PostgreSQL или SQLite).
+
+### Локальная разработка
+
+```bash
+# Применить все миграции (и создать новые при необходимости)
+npx prisma migrate dev
+
+# Перегенерировать Prisma Client (обычно выполняется автоматически)
+npx prisma generate
+
+# Заполнить тестовыми данными (если настроен сид)
+npx prisma db seed
+
+# Открыть Prisma Studio (опционально)
+npx prisma studio
+```
+
+### Продакшн/CI
+
+```bash
+# Применить уже существующие миграции без интерактивных вопросов
+npx prisma migrate deploy
+
+# Перегенерировать Prisma Client
+npx prisma generate
+```
+
+### Сброс базы (осторожно!)
+
+```bash
+npx prisma migrate reset
+```
+
 ## Дополнительно
 
 - Для редактирования таймлайна используется `TimelineForm.tsx`.
