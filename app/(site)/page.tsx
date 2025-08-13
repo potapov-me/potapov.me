@@ -177,7 +177,7 @@ export default function Home() {
                     </aside>
                     <div className="order-1 md:order-2 md:w-2/3">
                         {/* Блок "Обо мне" */}
-                        <section className="mb-16">
+                        <section className="mb-10">
                             <p className="text-lg leading-relaxed">
                                 <span className="font-bold">{new Date().getFullYear() - 1988} лет</span>, из которых более
                                 20 посвящено разработке программного обеспечения.
