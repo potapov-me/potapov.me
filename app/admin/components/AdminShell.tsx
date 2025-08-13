@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { FaCalendarAlt, FaBriefcase, FaChartLine } from "react-icons/fa";
 import { FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import { ReactNode, useState } from "react";
+import { useToast } from "@/app/hooks/use-toast";
 
 interface AdminShellProps {
   children: ReactNode;
@@ -14,9 +15,14 @@ export function AdminShell({ children }: AdminShellProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { toast } = useToast();
 
   const handleLogout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
+    toast({
+      title: "Выход",
+      description: "Вы успешно вышли из системы.",
+    });
     router.push("/admin/login");
   };
 
@@ -39,7 +45,7 @@ export function AdminShell({ children }: AdminShellProps) {
   ];
 
   const renderSidebarContent = () => (
-    <div className="flex flex-col flex-grow pt-5 bg-gray-800 text-white overflow-y-auto">
+    <div className="flex flex-col flex-grow pt-5 bg-secondary bg-texture text-white overflow-y-auto">
       <div className="flex-1 flex flex-col">
         <nav className="flex-1 px-2 space-y-1">
           {menuItems.map((item) => {
@@ -103,7 +109,7 @@ export function AdminShell({ children }: AdminShellProps) {
 
       {/* Static sidebar for desktop */}
       <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 z-30">
-        <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
+        <div className="flex-1 flex flex-col min-h-0">
           {renderSidebarContent()}
         </div>
       </div>

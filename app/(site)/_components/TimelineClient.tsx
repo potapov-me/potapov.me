@@ -17,6 +17,7 @@ function TimelineList() {
           lessons={item.lessons}
           isBlink={item.isBlink}
           isStartup={item.isStartup}
+          link={item.link}
         />
       ))}
     </div>

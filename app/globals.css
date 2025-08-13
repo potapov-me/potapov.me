@@ -3,10 +3,10 @@
 /*noinspection CssInvalidAtRule*/
 @theme {
   /*--color-*: initial;*/
-  --color-primary: #680313;
+  --color-primary: #8B0000;
   --color-primary-foreground: #fefefe;
-  --color-primary-dark: #4a020d;
-  --color-primary-light: #fdbbc6;
+  --color-primary-dark: #620000;
+  --color-primary-light: #D7C8C8;
   /* Stricter, neutral secondary and grays */
   --color-secondary: #334155; /* slate-700 */
   --color-error: #ef4444;

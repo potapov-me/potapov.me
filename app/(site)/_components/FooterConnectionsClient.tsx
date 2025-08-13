@@ -40,15 +40,15 @@ export default function FooterConnectionsClient() {
   }, []);
 
   if (error) {
-    return <div className="text-xs text-gray-400 mt-4">Нет данных</div>;
+    return <div className="text-xs text-gray-400 mt-4 text-center">Нет данных об активных подключениях</div>;
   }
 
   if (!data) {
-    return <div className="text-xs text-gray-400 mt-4">Загрузка…</div>;
+    return <div className="text-xs text-gray-400 mt-4 text-center">Загрузка…</div>;
   }
 
   return (
-    <div className="mt-6">
+    <div className="mt-6 text-center">
       <div className="text-xs text-gray-400">Подключения</div>
       <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
         <InfoPill label="Принято" value={data.accepted} />

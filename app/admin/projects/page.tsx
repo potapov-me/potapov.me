@@ -36,7 +36,7 @@ const ProjectForm = ({project, onSave, onCancel}: { project: Partial<Project> | 
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 overflow-y-auto pt-10 md:items-center">
             <div className="bg-white p-8 rounded-lg w-full max-w-md shadow-xl">
                 <h2 className="text-2xl font-bold mb-6">{project?.id ? "Редактировать проект" : "Добавить проект"}</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -160,8 +160,8 @@ export default function ProjectsPage() {
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Управление проектами</h1>
                 <Button onClick={() => { setEditingProject({}); setIsModalOpen(true); }}>
-                    <FiPlus className="mr-2"/>
-                    Добавить проект
+                    <FiPlus className="sm:mr-2"/>
+                    <span className="hidden sm:inline">Добавить проект</span>
                 </Button>
             </div>
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -190,10 +190,12 @@ export default function ProjectsPage() {
                                         <td className="px-6 py-4 text-sm text-gray-500 max-w-md truncate">{project.description}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <Button variant="outline" size="sm" className="mr-2" onClick={() => { setEditingProject(project); setIsModalOpen(true); }}>
-                                                <FiEdit className="mr-1" /> Редактировать
+                                                <FiEdit className="sm:mr-1" />
+                                                <span className="hidden sm:inline">Редактировать</span>
                                             </Button>
                                             <Button variant="destructive" size="sm" onClick={() => handleDelete(project.id)}>
-                                                <FiTrash2 className="mr-1" /> Удалить
+                                                <FiTrash2 className="sm:mr-1" />
+                                                <span className="hidden sm:inline">Удалить</span>
                                             </Button>
                                         </td>
                                     </tr>

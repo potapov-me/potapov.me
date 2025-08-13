@@ -64,7 +64,7 @@ export function TimelineForm({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 overflow-y-auto pt-10 md:items-center">
         <div className="bg-white p-8 rounded-lg w-full max-w-md shadow-xl">
             <h2 className="text-2xl font-bold mb-6">{initialData?.id ? "Редактировать событие" : "Добавить событие"}</h2>
             <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
