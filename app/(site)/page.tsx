@@ -41,13 +41,13 @@ export default function Home() {
         {
             category: "Backend",
             items: [
-                { name: "Python", icon: FaPython },
-                { name: "Django", icon: SiDjango },
-                { name: "NestJS", icon: SiNestjs },
-                { name: "FastAPI", icon: SiFastapi },
-                { name: "Go", icon: SiGo },
-                { name: "Wagtail", icon: SiWagtail },
-                { name: "NextJS", icon: SiNextdotjs },
+                { name: "Python", icon: FaPython, hideName: true },
+                { name: "Django", icon: SiDjango, hideName: true },
+                { name: "NestJS", icon: SiNestjs, hideName: true },
+                { name: "FastAPI", icon: SiFastapi, hideName: true },
+                { name: "Go", icon: SiGo, hideName: true },
+                { name: "Wagtail", icon: SiWagtail, hideName: true },
+                { name: "NextJS", icon: SiNextdotjs, hideName: true },
             ]
         },
         {
