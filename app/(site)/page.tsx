@@ -41,45 +41,45 @@ export default function Home() {
         {
             category: "Backend",
             items: [
-                { name: "Python", icon: FaPython, hideName: true },
-                { name: "Django", icon: SiDjango, hideName: true },
-                { name: "NestJS", icon: SiNestjs, hideName: true },
-                { name: "FastAPI", icon: SiFastapi, hideName: true },
-                { name: "Go", icon: SiGo, hideName: true },
-                { name: "Wagtail", icon: SiWagtail, hideName: true },
-                { name: "NextJS", icon: SiNextdotjs, hideName: true },
+                { name: "Python", icon: FaPython, hideName: true, url: "https://www.python.org/" },
+                { name: "Django", icon: SiDjango, hideName: true, url: "https://www.djangoproject.com/" },
+                { name: "NestJS", icon: SiNestjs, hideName: true, url: "https://nestjs.com/" },
+                { name: "FastAPI", icon: SiFastapi, hideName: true, url: "https://fastapi.tiangolo.com/" },
+                { name: "Go", icon: SiGo, hideName: true, url: "https://go.dev/" },
+                { name: "Wagtail", icon: SiWagtail, hideName: true, url: "https://wagtail.io/" },
+                { name: "NextJS", icon: SiNextdotjs, hideName: true, url: "https://nextjs.org/" },
             ]
         },
         {
             category: "Frontend",
             items: [
-                { name: "React", icon: FaReact, hideName: true },
-                { name: "VueJS", icon: FaVuejs, hideName: true },
-                { name: "JS", icon: SiJavascript, hideName: true },
-                { name: "TypeScript", icon: SiTypescript, hideName: true },
-                { name: "Tailwind", icon: SiTailwindcss },
+                { name: "React", icon: FaReact, hideName: true, url: "https://react.dev/" },
+                { name: "VueJS", icon: FaVuejs, hideName: true, url: "https://vuejs.org/" },
+                { name: "JS", icon: SiJavascript, hideName: true, url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+                { name: "TypeScript", icon: SiTypescript, hideName: true, url: "https://www.typescriptlang.org/" },
+                { name: "Tailwind", icon: SiTailwindcss, url: "https://tailwindcss.com/" },
             ]
         },
         {
             category: "DevOps & Databases",
             items: [
-                { name: "Docker", icon: FaDocker },
-                { name: "Linux", icon: FaLinux },
-                { name: "Git", icon: FaGitAlt },
-                { name: "MySQL", icon: SiMysql },
+                { name: "Docker", icon: FaDocker, url: "https://www.docker.com/" },
+                { name: "Linux", icon: FaLinux, url: "https://www.linux.org/" },
+                { name: "Git", icon: FaGitAlt, url: "https://git-scm.com/" },
+                { name: "MySQL", icon: SiMysql, url: "https://www.mysql.com/" },
                 // {name: "Postgres", icon: SiPostgresql},
-                { name: "Prisma", icon: SiPrisma },
-                { name: "MongoDb", icon: SiMongodb },
-                { name: "RabbitMQ", icon: SiRabbitmq },
+                { name: "Prisma", icon: SiPrisma, url: "https://www.prisma.io/" },
+                { name: "MongoDb", icon: SiMongodb, url: "https://www.mongodb.com/" },
+                { name: "RabbitMQ", icon: SiRabbitmq, url: "https://www.rabbitmq.com/" },
             ]
         },
         {
             category: "Other",
             items: [
-                { name: "FSD", icon: FsdIcon },
-                { name: "Agile", icon: AgileIcon },
-                { name: "Scrum", icon: ScrumIcon },
-                { name: "Kanban", icon: KanbanIcon },
+                { name: "FSD", icon: FsdIcon, url: "https://feature-sliced.design/" },
+                { name: "Agile", icon: AgileIcon, url: "https://www.atlassian.com/agile" },
+                { name: "Scrum", icon: ScrumIcon, url: "https://www.scrum.org/" },
+                { name: "Kanban", icon: KanbanIcon, url: "https://www.atlassian.com/agile/kanban" },
             ]
         }
     ];
