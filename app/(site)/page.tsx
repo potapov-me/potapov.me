@@ -86,8 +86,8 @@ export default function Home() {
 
     return (
         <>
-            <header className="py-12 px-6">
-                <div className="max-w-5xl mx-auto text-center prose-base">
+            <header className="py-8 px-6">
+                <div className="max-w-5xl mx-auto text-center">
                     <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4 text-primary flex items-center justify-center">
                         Константин Потапов
                     </h1>
@@ -100,7 +100,7 @@ export default function Home() {
                     </div>
                 </div>
             </header>
-            <main className="max-w-5xl mx-auto px-6 pb-16 prose-base">
+            <main className="max-w-5xl mx-auto px-6 pb-12">
                 <Script id="ld-org" type="application/ld+json" strategy="afterInteractive"
                         dangerouslySetInnerHTML={{ __html: JSON.stringify({
                             "@context": "https://schema.org",
@@ -133,7 +133,7 @@ export default function Home() {
                             priority
                             fetchPriority="high"
                         />
-                        <section className="mt-6 card-elevated p-5 rounded-lg shadow-sm">
+                        <section className="mt-4 card-elevated p-5 rounded-lg shadow-sm not-prose">
                             <h2 className="text-xl font-heading mb-4">Контакты</h2>
                             <ul className="space-y-3">
                                 <li className="flex items-center">
@@ -158,7 +158,7 @@ export default function Home() {
                             </ul>
                         </section>
                         <Skills skills={skills} />
-                        <section className="mb-6 card-elevated p-5 rounded-lg shadow-sm below-fold">
+                        <section className="mb-4 card-elevated p-5 rounded-lg shadow-sm below-fold not-prose">
                             <h3 className="text-xl font-heading mb-4">Достижения</h3>
                             <ul className="space-y-3">
                                 <li className="flex items-center">
@@ -178,17 +178,17 @@ export default function Home() {
                     </aside>
                     <div className="order-1 md:order-2 md:w-2/3">
                         {/* Блок "Обо мне" */}
-                        <section className="mb-10">
+                        <section className="mb-8">
                             <p className="text-lg leading-relaxed">
                                 <span className="font-bold">{new Date().getFullYear() - 1988} лет</span>, из которых более
                                 20 посвящено разработке программного обеспечения.
                             </p>
                             <div className="mt-3 p-3 bg-secondary border border-primary/20 text-white rounded-lg">
-                                <p className="text-lg leading-relaxed">Открыт к предложениям о сотрудничестве от 500к ₽&nbsp;/&nbsp;мес.</p>
+                                <p className="text-lg leading-relaxed not-prose">Открыт к предложениям о сотрудничестве от 500к ₽&nbsp;/&nbsp;мес.</p>
                             </div>
 
                             <div className="flex items-start mt-3">
-                                <div className="bg-primary text-white p-3 flex-1 rounded-lg">
+                                <div className="bg-primary text-white p-3 flex-1 rounded-lg not-prose">
                                     <p>Уральский государственный технический университет (УГТУ-УПИ)</p>
                                     <p className="text-sm text-white mt-1">Выпуск 2010 года, физико-технический
                                         факультет, кафедра молекулярной физики</p>
@@ -200,7 +200,7 @@ export default function Home() {
                     </div>
                 </div>
                 {/* Философия */}
-                <section className="bg-secondary p-8 text-white rounded-xl shadow-sm below-fold">
+                <section className="bg-secondary p-6 text-white rounded-xl shadow-sm below-fold not-prose">
                     <h2 className="font-heading text-2xl font-bold mb-4">Моя философия развития</h2>
                     <ul className="list-disc pl-5 space-y-2 text-white">
                         {philosophy.map((item, index) => (

@@ -48,7 +48,7 @@ export default function FooterConnectionsClient() {
   }
 
   return (
-    <div className="mt-6 text-center">
+    <div className="mt-4 text-center">
       <div className="text-xs text-gray-400">Подключения</div>
       <div className="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm">
         <InfoPill label="Принято" value={data.accepted} />

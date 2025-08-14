@@ -22,9 +22,9 @@ export const TimelineItemComponent: React.FC<TimelineItem> = ({ year, title, des
                     titleContent
                 )}
             </h3>
-            <p className="mt-1.5" dangerouslySetInnerHTML={{ __html: description }}></p>
+            <p className="mt-1.5 not-prose" dangerouslySetInnerHTML={{ __html: description }}></p>
             {lessons && (
-                <div className="mt-3 rounded-lg p-3 border border-primary/20 bg-primary/5">
+                <div className="mt-3 rounded-lg p-3 border border-primary/20 bg-primary/5 not-prose">
                     <p className="font-medium text-primary" dangerouslySetInnerHTML={{ __html: `${lessons}` }}></p>
                 </div>
             )}

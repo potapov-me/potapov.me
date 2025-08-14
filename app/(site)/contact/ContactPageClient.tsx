@@ -63,7 +63,7 @@ export default function ContactPageClient() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto px-6 pb-20 prose-base">
+    <main className="max-w-5xl mx-auto py-12 px-6 pb-20 prose-base">
       <h1 className="font-heading text-4xl md:text-5xl font-bold my-4 text-primary text-center">
         Контакты
       </h1>
@@ -73,7 +73,7 @@ export default function ContactPageClient() {
 
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <div className="bg-white rounded-xl shadow-sm p-6 border">
-          <h2 className="font-heading text-2xl font-bold mb-4">
+          <h2 className="font-heading text-2xl font-bold mb-4 mt-1">
             Форма обратной связи
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
@@ -124,7 +124,7 @@ export default function ContactPageClient() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6 border">
-          <h2 className="font-heading text-2xl font-bold mb-4">
+          <h2 className="font-heading text-2xl font-bold mb-4 mt-1">
             Другие способы связи
           </h2>
           <ul className="list-disc pl-6 space-y-2">

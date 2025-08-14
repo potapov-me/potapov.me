@@ -19,7 +19,7 @@ interface SkillsProps {
 
 export const Skills = ({skills}: SkillsProps) => {
     return (
-        <section className="my-8">
+        <section className="my-8 not-prose">
             <div className="space-y-4">
                 {skills.map((category, index) => (
                     <div key={index}>
