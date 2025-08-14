@@ -11,7 +11,8 @@ const submissionSchema = z.object({
 
 export async function GET() {
   try {
-    const session = cookies().get("session");
+    const cookieStore = await cookies();
+    const session = cookieStore.get("session");
     if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
@@ -32,6 +33,7 @@ export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
     const parsed = submissionSchema.safeParse(data);
+    console.log(parsed, data);
     if (!parsed.success) {
       return NextResponse.json(
         { message: "Invalid data", errors: parsed.error.format() },

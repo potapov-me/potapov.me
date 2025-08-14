@@ -12,7 +12,8 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = cookies().get("session");
+    const cookieStore = await cookies();
+    const session = cookieStore.get("session");
     if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
@@ -53,7 +54,8 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = cookies().get("session");
+    const cookieStore = await cookies();
+    const session = cookieStore.get("session");
     if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
