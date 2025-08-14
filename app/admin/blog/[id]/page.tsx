@@ -22,7 +22,7 @@ const postSchema = z.object({
   title: z.string().min(3, 'Заголовок должен быть не менее 3 символов'),
   content: z.string().min(10, 'Содержимое должно быть не менее 10 символов'),
   slug: z.string().regex(/^[a-z0-9-]+$/, 'Слаг может содержать только строчные буквы, цифры и дефисы'),
-  coverImage: z.string().optional().or(z.literal('')),
+  coverImage: z.string().optional().or(z.literal('')).nullable(),
   published: z.boolean().default(false),
 });
 
