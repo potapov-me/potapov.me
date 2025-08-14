@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
 
 /*noinspection CssInvalidAtRule*/
 @theme {
@@ -20,6 +21,26 @@
   --color-green-100: #c8e6c9;
   --color-green-400: #66bb6a;
   --color-green-700: #388e3c;
+
+  --typography-body-color: var(--color-gray-700);
+  --typography-headings-color: var(--color-primary);
+  --typography-links-color: var(--color-primary);
+  --typography-links-hover-color: var(--color-primary-dark);
+  --tw-prose-quote-borders: var(--color-primary);
+  --typography-quotes-color: var(--color-gray-500);
+  --typography-font-size: 18px;
+  --typography-line-height: 1.6;
+  --typography-h1-font-size: 35px;
+  --typography-h2-font-size: 28px;
+  --typography-h3-font-size: 23px;
+  --typography-h1-font-weight: 700;
+  --typography-h2-font-weight: 700;
+  --typography-h3-font-weight: 700;
+  --typography-strong-color: var(--color-primary-dark);
+  --typography-code-bg: var(--color-gray-100);
+  --typography-code-color: var(--color-secondary);
+  --typography-pre-padding: 1rem;
+  --typography-pre-border-radius: 0.5rem;
 }
 
 .prose-base {
@@ -61,4 +82,12 @@ a {
 .below-fold {
   content-visibility: auto;
   contain-intrinsic-size: 1px 1000px;
+}
+
+.ql-code-block {
+  background-color: var(--color-gray-100);
+  color: var(--color-secondary);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-family: monospace;
 }

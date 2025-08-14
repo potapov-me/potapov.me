@@ -39,7 +39,7 @@ export default function ContactsAdminPage() {
         body: JSON.stringify({ isRead }),
       });
       setItems((prev) => prev.map((i) => (i.id === id ? { ...i, isRead } : i)));
-    } catch (e) {
+    } catch {
       toast({ title: "Ошибка", description: "Не удалось обновить статус", variant: "destructive" });
     }
   };
@@ -50,7 +50,7 @@ export default function ContactsAdminPage() {
       await fetch(`/api/contacts/${id}`, { method: "DELETE" });
       setItems((prev) => prev.filter((i) => i.id !== id));
       toast({ title: "Успех", description: "Заявка удалена" });
-    } catch (e) {
+    } catch {
       toast({ title: "Ошибка", description: "Не удалось удалить", variant: "destructive" });
     }
   };

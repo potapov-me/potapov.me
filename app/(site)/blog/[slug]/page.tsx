@@ -20,7 +20,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   ];
 
   return (
-    <main className="max-w-4xl mx-auto py-12 px-4">
+    <main className="max-w-5xl mx-auto py-12 px-4">
       <Breadcrumbs items={breadcrumbItems} />
       <div className="text-center my-8">
         <h1 className="font-heading text-4xl md:text-5xl font-bold text-primary">{post.title}</h1>
@@ -37,7 +37,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           className="w-full h-auto rounded-lg mb-8"
         />
       )}
-      <div className="prose lg:prose-xl max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
     </main>
   );
 }
