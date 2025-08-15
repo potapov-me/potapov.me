@@ -1,6 +1,6 @@
 import MainMenu from "../components/MainMenu";
 import dynamic from "next/dynamic";
-import {FaTelegramPlane, FaGithub, FaEnvelope} from "react-icons/fa";
+import {FaTelegramPlane, FaGithub, FaEnvelope, FaYoutube} from "react-icons/fa";
 import {SiHabr, SiVk} from "react-icons/si";
 import FooterConnectionsClient from "./_components/FooterConnectionsClient";
 
@@ -24,6 +24,11 @@ export default function RootLayout({
             href: "https://habr.com/ru/users/potapov-me/",
             label: "Habr",
             icon: <SiHabr/>,
+        },
+        {
+            href: "https://www.youtube.com/@potapovme",
+            label: "YouTube",
+            icon: <FaYoutube/>,
         },
         {
             href: "mailto:constantin@potapov.me",

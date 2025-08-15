@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import { Breadcrumbs } from '@/app/components/ui/Breadcrumbs';
-import Image from 'next/image';
 import { prisma } from '@/app/lib/db';
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -28,15 +27,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <p className="mt-2 text-sm text-gray-500">Опубликовано {new Date(post.publishedAt).toLocaleDateString()}</p>
         )}
       </div>
-      {post.coverImage && (
-        <Image
-          src={post.coverImage}
-          alt={post.title}
-          width={1200}
-          height={630}
-          className="w-full h-auto rounded-lg mb-8"
-        />
-      )}
       <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
     </main>
   );
