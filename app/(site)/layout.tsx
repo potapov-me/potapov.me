@@ -1,7 +1,7 @@
 import MainMenu from "../components/MainMenu";
 import dynamic from "next/dynamic";
 import {FaTelegramPlane, FaGithub, FaEnvelope, FaYoutube} from "react-icons/fa";
-import {SiHabr, SiVk} from "react-icons/si";
+import {SiHabr, SiLinkedin, SiVk} from "react-icons/si";
 import FooterConnectionsClient from "./_components/FooterConnectionsClient";
 import Script from "next/script";
 
@@ -25,6 +25,11 @@ export default function RootLayout({
             href: "https://habr.com/ru/users/potapov-me/",
             label: "Habr",
             icon: <SiHabr/>,
+        },
+        {
+            href: "https://www.linkedin.com/in/constantin-potapov-99ba6437a/",
+            label: "LinkedIn",
+            icon: <SiLinkedin/>,
         },
         {
             href: "https://www.youtube.com/@potapovme",
@@ -103,6 +108,7 @@ export default function RootLayout({
                 `}
             </Script>
             <noscript>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <div><img src="https://mc.yandex.ru/watch/103766300" style={{position: 'absolute', left: '-9999px'}}
                           alt=""/></div>
             </noscript>
