@@ -27,7 +27,7 @@ function TimelineList() {
 export default function TimelineClient() {
   return (
     <section className="mb-16 below-fold">
-      {/*<h2 className="font-heading text-3xl font-bold mb-6 text-center">Профессиональная эволюция</h2>*/}
+      <h2 className="font-heading text-3xl font-bold mb-6 text-center">Самый яркий проект года</h2>
       <TimelineProvider>
         <TimelineList />
       </TimelineProvider>

@@ -19,7 +19,7 @@ const timelineItemSchema = z.object({
 export async function GET() {
   try {
     const timeline = await prisma.timelineItem.findMany({
-      orderBy: { year: "asc" },
+      orderBy: { year: "desc" },
     });
     return NextResponse.json(timeline);
   } catch (error) {
