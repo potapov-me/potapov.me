@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/db";
 import { z } from "zod";
 import { cookies } from "next/headers";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  secure: Number(process.env.SMTP_PORT) === 465,
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 const submissionSchema = z.object({
   name: z.string().min(1, "Укажите имя"),
@@ -43,6 +54,13 @@ export async function POST(req: NextRequest) {
 
     const created = await prisma.contactSubmission.create({
       data: parsed.data,
+    });
+
+    await transporter.sendMail({
+      from: "info@iq.moscow",
+      to: "constantin@potapov.me",
+      subject: "Новая заявка с сайта",
+      html: `<p>Имя: ${parsed.data.name}</p><p>Email: ${parsed.data.email}</p><p>Сообщение: ${parsed.data.message}</p>`,
     });
 
     return NextResponse.json(created, { status: 201 });
