@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
     const parsed = submissionSchema.safeParse(data);
-    console.log(parsed, data);
+
     if (!parsed.success) {
       return NextResponse.json(
         { message: "Invalid data", errors: parsed.error.format() },
