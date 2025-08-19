@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FaCalendarAlt, FaBriefcase, FaChartLine, FaRss, FaEnvelope } from "react-icons/fa";
+import { FaCalendarAlt, FaBriefcase, FaChartLine, FaRss, FaEnvelope, FaLink } from "react-icons/fa";
 import { FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import { ReactNode, useState } from "react";
 import { useToast } from "@/app/hooks/use-toast";
@@ -52,6 +52,11 @@ export function AdminShell({ children }: AdminShellProps) {
       href: "/admin/blog",
       icon: FaRss,
     },
+    {
+      name: "Ссылки",
+      href: "/admin/short-urls",
+      icon: FaLink,
+    },
   ];
 
   const renderSidebarContent = () => (
@@ -59,7 +64,7 @@ export function AdminShell({ children }: AdminShellProps) {
       <div className="flex-1 flex flex-col">
         <nav className="flex-1 px-2 space-y-1">
           {menuItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}

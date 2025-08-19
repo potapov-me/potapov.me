@@ -55,3 +55,22 @@ model ContactSubmission {
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
 }
+
+model ShortUrl {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  originalUrl String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  visits      UrlVisit[]
+}
+
+model UrlVisit {
+  id          String   @id @default(cuid())
+  shortUrl    ShortUrl @relation(fields: [shortUrlId], references: [id])
+  shortUrlId  String
+  timestamp   DateTime @default(now())
+  ipAddress   String?
+  userAgent   String?
+  referer     String?
+}
