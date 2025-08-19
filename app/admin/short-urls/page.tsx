@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FiEdit, FiPlus, FiTrash2 } from 'react-icons/fi';
+import {FiBarChart2, FiEdit, FiPlus, FiTrash2} from 'react-icons/fi';
 import { Button } from '@/app/components/ui/button';
 import { useToast } from '@/app/hooks/use-toast';
 import Link from 'next/link';
@@ -51,12 +51,20 @@ export default function ShortUrlsPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Короткие ссылки</h1>
-        <Link href="/admin/short-urls/new">
-          <Button>
-            <FiPlus className="sm:mr-2" />
-            <span className="hidden sm:inline">Новая ссылка</span>
-          </Button>
-        </Link>
+        <div className="flex space-x-2">
+          <Link href="/admin/short-urls/analytics">
+            <Button variant="outline">
+              <FiBarChart2 className="sm:mr-2" />
+              <span className="hidden sm:inline">Аналитика</span>
+            </Button>
+          </Link>
+          <Link href="/admin/short-urls/new">
+            <Button>
+              <FiPlus className="sm:mr-2" />
+              <span className="hidden sm:inline">Новая ссылка</span>
+            </Button>
+          </Link>
+        </div>
       </div>
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="overflow-x-auto">

@@ -26,6 +26,7 @@ export default function ShortUrlEditorPage() {
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<ShortUrlFormData>({
     resolver: zodResolver(shortUrlSchema),
+    mode: 'onBlur',
   });
 
   useEffect(() => {
@@ -55,8 +56,13 @@ export default function ShortUrlEditorPage() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Не удалось сохранить ссылку');
+        const errorData = await response.json().catch(() => ({ error: 'Не удалось обработать ответ сервера' }));
+        toast({
+          title: 'Ошибка',
+          description: errorData.error || 'Не удалось сохранить ссылку',
+          variant: 'destructive',
+        });
+        return; // Stop execution
       }
 
       toast({

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FaCalendarAlt, FaBriefcase, FaChartLine, FaRss, FaEnvelope, FaLink } from "react-icons/fa";
+import { FaCalendarAlt, FaBriefcase, FaRss, FaEnvelope, FaLink } from "react-icons/fa";
 import { FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import { ReactNode, useState } from "react";
 import { useToast } from "@/app/hooks/use-toast";
@@ -27,11 +27,6 @@ export function AdminShell({ children }: AdminShellProps) {
   };
 
   const menuItems = [
-    {
-      name: "Дашборд",
-      href: "/admin",
-      icon: FaChartLine,
-    },
     {
       name: "Таймлайн",
       href: "/admin/timeline",
