@@ -64,7 +64,7 @@ export default function TimelineForm({ timelineItem, onSave, onCancel }: Timelin
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-start z-50 overflow-y-auto pt-10 md:items-center">
       <div className="bg-white p-8 rounded-lg w-full max-w-md shadow-lg">
         <h2 className="text-2xl font-bold mb-4">{timelineItem?.id ? 'Редактировать Запись' : 'Добавить Новую Запись'}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

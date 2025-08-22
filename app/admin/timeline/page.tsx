@@ -65,8 +65,8 @@ export default function AdminTimelinePage() {
         <div className="flex justify-between items-center mb-6">
             <h1 className="text-3xl font-bold">Управление таймлайном</h1>
             <Button onClick={() => { setEditingItem(null); setIsModalOpen(true); }}>
-                <FiPlus className="mr-2"/>
-                Добавить событие
+                <FiPlus className="sm:mr-2"/>
+                <span className="hidden sm:inline">Добавить событие</span>
             </Button>
         </div>
 
@@ -105,10 +105,12 @@ export default function AdminTimelinePage() {
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <Button variant="outline" size="sm" className="mr-2" onClick={() => { setEditingItem(item); setIsModalOpen(true); }}>
-                                                <FiEdit className="mr-1" /> Редактировать
+                                                <FiEdit className="sm:mr-1" />
+                                                <span className="hidden sm:inline">Редактировать</span>
                                             </Button>
                                             <Button variant="destructive" size="sm" onClick={() => handleDelete(item.id)}>
-                                                <FiTrash2 className="mr-1" /> Удалить
+                                                <FiTrash2 className="sm:mr-1" />
+                                                <span className="hidden sm:inline">Удалить</span>
                                             </Button>
                                         </td>
                                     </tr>

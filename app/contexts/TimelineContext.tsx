@@ -101,7 +101,11 @@ export const TimelineProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   useEffect(() => {
-    fetchTimeline();
+    // Отложенная загрузка данных, чтобы не конкурировать за LCP
+    const timeout = setTimeout(() => {
+      fetchTimeline();
+    }, 0);
+    return () => clearTimeout(timeout);
   }, []);
 
   const value = {
